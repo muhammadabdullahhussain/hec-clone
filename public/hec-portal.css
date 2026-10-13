@@ -1,0 +1,561 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+/* =====================================================
+   HEC e-Services Public Portal — Pixel-Perfect CSS
+   Extracted directly from eservices.hec.gov.pk source
+   ===================================================== */
+
+/* ── Page Background ── */
+body {
+  background-color: #f5f7fa;
+  font-family: 'Montserrat', Poppins, Roboto, sans-serif;
+}
+
+.hec-public-screen,
+.hec-public-screen * {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* ── Page Wrapper ── */
+.hec-public-screen {
+  padding-bottom: 2.5rem;
+  padding-top: 2rem;
+}
+
+/* ── Page Header ── */
+.hec-public-header {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #e4eaee;
+}
+
+.hec-public-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #3f4b57;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.hec-public-lead {
+  margin: 0;
+  max-width: 52rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #6b7c89;
+}
+
+/* ── Panel (Search + Results) ── */
+.hec-panel {
+  background: #ffffff;
+  border: 1px solid #e4eaee;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(15, 34, 58, 0.06);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.hec-panel--results {
+  margin-top: 0.5rem;
+}
+
+.hec-panel-head {
+  padding: 0.85rem 1.25rem;
+  background: linear-gradient(180deg, #f4faf6 0%, #ffffff 100%);
+  border-bottom: 1px solid #e4eaee;
+}
+
+.hec-panel-head--split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.hec-panel-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #3f4b57;
+}
+
+.hec-panel-body {
+  padding: 1.25rem 1.25rem 1.35rem;
+}
+
+.hec-form-grid {
+  margin-bottom: 0.25rem;
+}
+
+/* ── Angular Material-style Outline Input ── */
+/* ── Angular Material Outline Inputs (100% Matched to eservices.hec.gov.pk) ── */
+
+/* 1. Base Input Font & Color */
+.mat-form-field-appearance-outline .mat-input-element {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: rgba(51, 51, 51, 0.85) !important;
+  caret-color: #009049 !important;
+}
+
+/* Hide native placeholder so it NEVER clashes with the floating label */
+.mat-form-field-appearance-outline input::placeholder {
+  color: transparent !important;
+  opacity: 0 !important;
+}
+
+/* 2. Outline Border States (Exact Live Site Colors) */
+/* Idle / Default: Bold crisp border, not washed out */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(0, 0, 0, 0.65) !important;
+  opacity: 1 !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start,
+.mat-form-field-appearance-outline .mat-form-field-outline-end,
+.mat-form-field-appearance-outline .mat-form-field-outline-gap {
+  border-color: rgba(0, 0, 0, 0.65) !important;
+}
+
+/* Focused State: Green #1bb55e */
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: rgb(27, 181, 94) !important;
+  opacity: 1 !important;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-start,
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-end,
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-gap {
+  border-color: rgb(27, 181, 94) !important;
+}
+
+/* Invalid / Error State: Solid Red #ff2346 */
+.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline,
+.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-thick {
+  color: rgb(255, 35, 70) !important;
+  opacity: 1 !important;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-start,
+.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-end,
+.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-gap,
+.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-thick .mat-form-field-outline-start,
+.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-thick .mat-form-field-outline-end,
+.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-thick .mat-form-field-outline-gap {
+  border-color: rgb(255, 35, 70) !important;
+}
+
+/* 3. Label States */
+/* Default Idle Label */
+.mat-form-field-appearance-outline .mat-form-field-label {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Required Asterisk */
+.mat-form-field-appearance-outline .mat-placeholder-required {
+  color: inherit !important;
+}
+
+/* Focused Label */
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+  color: rgb(0, 144, 73) !important;
+}
+
+/* Invalid Label */
+.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-label {
+  color: rgb(244, 67, 54) !important;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-invalid .mat-placeholder-required {
+  color: rgb(244, 67, 54) !important;
+}
+
+/* Floating Label (Exact Angular Material transform translateY(-1.59375em) scale(0.75)) */
+.mat-form-field-appearance-outline:focus-within .mat-form-field-label,
+.mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-label,
+.mat-form-field-appearance-outline:has(.mat-input-element:not(:placeholder-shown)) .mat-form-field-label {
+  -webkit-transform: translateY(-1.59375em) scale(0.75) !important;
+  transform: translateY(-1.59375em) scale(0.75) !important;
+  width: auto !important;
+  display: block !important;
+  background-color: #ffffff !important;
+  padding: 0 4px !important;
+  z-index: 3 !important;
+}
+
+.mat-form-field-appearance-outline:focus-within .mat-form-field-outline-gap,
+.mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-outline-gap,
+.mat-form-field-appearance-outline:has(.mat-input-element:not(:placeholder-shown)) .mat-form-field-outline-gap,
+.mat-form-field-appearance-outline:focus-within .mat-form-field-outline-thick .mat-form-field-outline-gap,
+.mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-outline-thick .mat-form-field-outline-gap,
+.mat-form-field-appearance-outline:has(.mat-input-element:not(:placeholder-shown)) .mat-form-field-outline-thick .mat-form-field-outline-gap {
+  border-top-color: transparent !important;
+  border-top-style: none !important;
+}
+
+/* Valid outline color when field has content and is valid */
+.mat-form-field-appearance-outline.ng-valid.ng-dirty:not(.mat-form-field-invalid) .mat-form-field-outline-thick,
+.mat-form-field-appearance-outline.ng-valid.ng-dirty:not(.mat-form-field-invalid) .mat-form-field-outline {
+  color: rgb(27, 181, 94) !important;
+}
+.mat-form-field-appearance-outline.ng-valid.ng-dirty:not(.mat-form-field-invalid) .mat-form-field-outline-thick .mat-form-field-outline-start,
+.mat-form-field-appearance-outline.ng-valid.ng-dirty:not(.mat-form-field-invalid) .mat-form-field-outline-thick .mat-form-field-outline-end,
+.mat-form-field-appearance-outline.ng-valid.ng-dirty:not(.mat-form-field-invalid) .mat-form-field-outline-thick .mat-form-field-outline-gap {
+  border-color: rgb(27, 181, 94) !important;
+}
+.mat-form-field-appearance-outline.ng-valid.ng-dirty:not(.mat-form-field-invalid) .mat-form-field-outline-start,
+.mat-form-field-appearance-outline.ng-valid.ng-dirty:not(.mat-form-field-invalid) .mat-form-field-outline-end,
+.mat-form-field-appearance-outline.ng-valid.ng-dirty:not(.mat-form-field-invalid) .mat-form-field-outline-gap {
+  border-color: rgb(27, 181, 94) !important;
+}
+
+/* 4. Hints & Errors */
+.mat-form-field-appearance-outline .mat-hint {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: #6b7c89 !important;
+  margin-top: 2px !important;
+}
+
+.mat-form-field-appearance-outline .mat-error {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 8.16px !important;
+  font-weight: 500 !important;
+  color: rgb(244, 67, 54) !important;
+  margin-top: 2px !important;
+}
+
+
+/* ── Captcha Block ── */
+.hec-captcha-block {
+  margin: 1.25rem 0 1.35rem;
+  padding: 1rem 1rem 1.1rem;
+  background: #fafbfc;
+  border: 1px dashed #d1dbe2;
+  border-radius: 8px;
+}
+
+.hec-captcha-label {
+  display: block;
+  margin-bottom: 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6b7c89;
+}
+
+/* ── Toolbar ── */
+.hec-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e4eaee;
+  margin-top: 1rem;
+}
+
+.hec-toolbar-primary,
+.hec-toolbar-secondary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── Buttons ── */
+.hec-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 2.65rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hec-btn--primary {
+  color: #fff;
+  background: #1bb55e;
+  border-color: #1bb55e;
+  box-shadow: 0 2px 8px rgba(27, 181, 94, 0.35);
+}
+
+.hec-btn--primary:hover:not(:disabled) {
+  background: #159c52;
+  border-color: #159c52;
+}
+
+.hec-btn--primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.hec-btn--reset {
+  color: #fff;
+  background: #e8940c;
+  border-color: #d9820a;
+  box-shadow: 0 2px 6px rgba(232, 148, 12, 0.35);
+}
+
+.hec-btn--reset:hover {
+  background: #cf8208;
+  border-color: #b87407;
+}
+
+.hec-btn--close {
+  color: #fff;
+  background: #dc3545;
+  border-color: #c82333;
+  box-shadow: 0 2px 6px rgba(220, 53, 69, 0.3);
+}
+
+.hec-btn--close:hover {
+  background: #c82333;
+  border-color: #bd2130;
+}
+
+/* ── Result Count Pill ── */
+.hec-count-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #16914c;
+  background: rgba(27, 181, 94, 0.12);
+  border-radius: 999px;
+}
+
+/* ── Results Wrap ── */
+.hec-results-wrap {
+  border: none;
+  box-shadow: none;
+  padding: 0 1.25rem 1.25rem;
+  margin: 0;
+}
+
+/* ── Result Card ── */
+.hec-result-card {
+  border-radius: 10px !important;
+  border: 1px solid #e4eaee !important;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.hec-result-card:hover {
+  box-shadow: 0 8px 28px rgba(15, 34, 58, 0.08);
+  border-color: rgba(27, 181, 94, 0.35) !important;
+}
+
+.hec-result-card-head {
+  padding: 20px 20px 0;
+}
+
+.hec-result-card-head h5 {
+  margin-bottom: 15px;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6b7c89 !important;
+}
+
+/* ── Card Body (exact typo from source: 'detial') ── */
+.task-detial-wrapper {
+  padding: 0 20px 10px;
+}
+
+/* ── Detail List ── */
+.hec-detail-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  list-style: none;
+}
+
+.hec-detail-item {
+  flex: 1 1 calc(50% - 0.5rem);
+  min-width: 140px;
+  margin: 0;
+  padding: 0.5rem 0.65rem;
+  background: #fafbfc;
+  border-radius: 6px;
+  border: 1px solid #eef2f5;
+}
+
+.hec-detail-item--full {
+  flex: 1 1 100%;
+  min-width: 100%;
+}
+
+.hec-detail-item dt {
+  margin: 0 0 0.2rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #94b1bc;
+}
+
+.hec-detail-item dd {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3f4b57;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+/* ── Print Button Row ── */
+.btnsrowkm {
+  padding: 0 20px 20px;
+  margin-top: 0.85rem;
+}
+
+.btnsrowkm .mat-raised-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  line-height: 40px;
+  padding: 0 2.65rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: #cce4d6;
+  color: #017a37;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.35s ease;
+  box-shadow: none;
+}
+
+.btnsrowkm .mat-raised-button:hover,
+.btnsrowkm .mat-raised-button:focus {
+  background-color: #08a54f;
+  color: #ffffff;
+}
+
+.btnsrowkm .mat-raised-button img {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  .hec-public-title {
+    font-size: 1.35rem;
+  }
+
+  .hec-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hec-toolbar-primary,
+  .hec-toolbar-secondary {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .hec-btn {
+    width: 100%;
+  }
+}
+
+/* ── Custom Error Popup ── */
+.warnpoupmsgs {
+  background-color: #ffffff;
+  padding: 50px 35px;
+  position: fixed;
+  top: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  z-index: 1050;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  min-width: 400px;
+}
+.warnpoupmsgs .popupmsg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.warnpoupmsgs .popupmsg h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #3d4b57;
+  margin-top: 15px;
+}
+.warnpoupmsgs .popupmsg p {
+  color: #3d4b57;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 15px 0 25px;
+  text-align: center;
+}
+.warnpoupmsgs .popupmsg img {
+  width: 100px;
+  height: 100px;
+  margin: 0 0 10px;
+  z-index: 2;
+}
+.warnpoupmsgs .popupmsg img.overlayimg {
+  position: absolute;
+  top: auto;
+  right: -45px;
+  bottom: -45px;
+  left: auto;
+  width: 250px;
+  height: 250px;
+  opacity: 0.18;
+  margin: 0;
+  z-index: 1;
+}
+.popup-btn-div {
+  position: relative;
+  z-index: 9;
+}
+
+/* Modal Overlay backdrop */
+.modal-backdrop-custom {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1040;
+}
+
+/* Fix button style */
+.warnpoupmsgs .btn-danger {
+  color: #fff;
+  background-color: #fd2826;
+  border-color: #fd2826;
+  padding: 10px 45px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.warnpoupmsgs .btn-danger:hover {
+  background-color: #dc2321;
+}

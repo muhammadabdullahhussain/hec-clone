@@ -1,0 +1,38 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Admin {
+  id            Int      @id @default(autoincrement())
+  username      String   @unique
+  password_hash String
+  createdAt     DateTime @default(now())
+}
+
+model HecRecord {
+  id               Int      @id @default(autoincrement())
+  cnic             String
+  reference_number String
+  application_id   String
+  name             String
+  name_on_degree   String
+  father_name      String   @default("")
+  date_of_birth    String   @default("")
+  enrollment_no    String   @default("")
+  degree_title     String
+  university       String
+  date_of_issuance String   @default("")
+  attested_by      String
+  photo_url        String?
+  pdf_url          String?
+  isActive         Boolean  @default(true)
+  isDeleted        Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

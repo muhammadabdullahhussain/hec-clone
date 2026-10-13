@@ -34,3 +34,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large archives and temporary debug files
+*.zip
+.chrome-tmp/
+scratch/
+qa_screenshots/
+.qoder/
+test_*.pdf
+redacted_test.pdf
+scratch_*.pdf
+test.pdf
+dev.db
+*-wal
+*-shm

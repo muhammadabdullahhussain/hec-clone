@@ -25184,7 +25184,7 @@ a.text-dark:hover, a.text-dark:focus {
   color: #212529 !important;
 }
 .text-muted {
-  color: #74788d !important;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 .text-black-50 {
   color: rgba(0, 0, 0, 0.5) !important;
@@ -41806,10 +41806,10 @@ b, strong {
   background-color: #a2a5b9 !important;
 }
 .kt-label-font-color-2 {
-  color: #74788d !important;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 .kt-label-bg-color-2 {
-  background-color: #74788d !important;
+  background-color: rgba(0, 0, 0, 0.87) !important;
 }
 .kt-label-font-color-3 {
   color: #595d6e !important;
@@ -85844,41 +85844,29 @@ button[_ngcontent-vlh-c2]:disabled, button[disabled][_ngcontent-vlh-c2] {
 }
 
 /* ── Custom Official HEC Verification Form Styles ── */
-.mat-form-field-label,
-.mat-form-field-appearance-outline .mat-form-field-label,
-mat-label,
-.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
-.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label mat-label {
-  font-weight: 700 !important;
-  color: #3f4b57 !important;
-  font-size: 13px !important;
-}
-
-.mat-placeholder-required,
-.mat-form-field-required-marker {
-  color: #dc3545 !important;
-  font-weight: 700 !important;
-  margin-left: 2px !important;
-}
-
 .hec-captcha-block,
 .hec-captcha-block[_ngcontent-vlh-c2] {
-  margin: 1.25rem 0 0.85rem 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
+  margin: 1.25rem 0 1.35rem !important;
+  padding: 1rem 1rem 1.1rem !important;
+  background: #fafbfc !important;
+  border: 1px dashed #d1dbe2 !important;
+  border-radius: 8px !important;
 }
 
 .hec-captcha-label,
 .hec-captcha-label[_ngcontent-vlh-c2] {
   display: block !important;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.65rem !important;
   font-size: 0.72rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
   color: #6b7c89 !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 
 .hec-toolbar,
@@ -85890,7 +85878,7 @@ mat-label,
   gap: 1rem !important;
   padding-top: 0 !important;
   border-top: none !important;
-  margin-top: 0.75rem !important;
+  margin-top: 1.25rem !important;
 }
 
 .hec-btn,
@@ -85917,6 +85905,7 @@ mat-label,
 }
 
 .hec-btn--primary:disabled,
+.hec-btn--primary.mat-button-disabled,
 .hec-btn--primary[_ngcontent-vlh-c2]:disabled {
   background-color: #a3d9b8 !important;
   border-color: #a3d9b8 !important;
@@ -85934,7 +85923,952 @@ mat-label,
   border-radius: 4px !important;
   box-shadow: none !important;
 }
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zaGFocnVraC5zaGFoaWQvRGVza3RvcC9IRUMvZXNlcnZpY2VzLWZyb250ZW5kL3NyYy9hcHAvc2hhcmVkL3NoYXJlZC1jb21wb25lbnRzL2hlYy1pbnB1dC9oZWMtaW5wdXQuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9zaGFyZWQtY29tcG9uZW50cy9oZWMtaW5wdXQvaGVjLWlucHV0LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7RUFDQSxXQUFBO0FDQ0o7O0FERUU7RUFDRSx5QkFBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvc2hhcmVkL3NoYXJlZC1jb21wb25lbnRzL2hlYy1pbnB1dC9oZWMtaW5wdXQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZXhhbXBsZS1jb250YWluZXIgLm1hdC1mb3JtLWZpZWxkICsgLm1hdC1mb3JtLWZpZWxkIHtcbiAgICBtYXJnaW4tbGVmdDogMHB4O1xuICAgIHdpZHRoOjEwMCU7XG4gIH1cblxuICAucmVkLWhpbnQge1xuICAgIGNvbG9yOiAjZGMzNTQ1ICFpbXBvcnRhbnQ7XG4gIH1cbiAgXG4gIC8vIC5tYXQtZm9ybS1maWVsZCB7XG4gIC8vICAgd2lkdGg6IGF1dG8gIWltcG9ydGFudDtcbiAgLy8gfVxuICBcbiAgLy8gLm1hdC1zZWxlY3QtdmFsdWUge1xuICAvLyAgIG1heC13aWR0aDogMTAwJTtcbiAgLy8gICB3aWR0aDogYXV0bztcbiAgLy8gfSIsIi5leGFtcGxlLWNvbnRhaW5lciAubWF0LWZvcm0tZmllbGQgKyAubWF0LWZvcm0tZmllbGQge1xuICBtYXJnaW4tbGVmdDogMHB4O1xuICB3aWR0aDogMTAwJTtcbn1cblxuLnJlZC1oaW50IHtcbiAgY29sb3I6ICNkYzM1NDUgIWltcG9ydGFudDtcbn0iXX0= */</style><style>.mat-form-field{display:inline-block;position:relative;text-align:left}[dir=rtl] .mat-form-field{text-align:right}.mat-form-field-wrapper{position:relative}.mat-form-field-flex{display:inline-flex;align-items:baseline;box-sizing:border-box;width:100%}.mat-form-field-prefix,.mat-form-field-suffix{white-space:nowrap;flex:none;position:relative}.mat-form-field-infix{display:block;position:relative;flex:auto;min-width:0;width:180px}@media (-ms-high-contrast:active){.mat-form-field-infix{border-image:linear-gradient(transparent,transparent)}}.mat-form-field-label-wrapper{position:absolute;left:0;box-sizing:content-box;width:100%;height:100%;overflow:hidden;pointer-events:none}[dir=rtl] .mat-form-field-label-wrapper{left:auto;right:0}.mat-form-field-label{position:absolute;left:0;font:inherit;pointer-events:none;width:100%;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;transform-origin:0 0;transition:transform .4s cubic-bezier(.25,.8,.25,1),color .4s cubic-bezier(.25,.8,.25,1),width .4s cubic-bezier(.25,.8,.25,1);display:none}[dir=rtl] .mat-form-field-label{transform-origin:100% 0;left:auto;right:0}.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,.mat-form-field-empty.mat-form-field-label{display:block}.mat-form-field-autofill-control:-webkit-autofill+.mat-form-field-label-wrapper .mat-form-field-label{display:none}.mat-form-field-can-float .mat-form-field-autofill-control:-webkit-autofill+.mat-form-field-label-wrapper .mat-form-field-label{display:block;transition:none}.mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label,.mat-input-server[placeholder]:not(:placeholder-shown)+.mat-form-field-label-wrapper .mat-form-field-label{display:none}.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label,.mat-form-field-can-float .mat-input-server[placeholder]:not(:placeholder-shown)+.mat-form-field-label-wrapper .mat-form-field-label{display:block}.mat-form-field-label:not(.mat-form-field-empty){transition:none}.mat-form-field-underline{position:absolute;width:100%;pointer-events:none;transform:scaleY(1.0001)}.mat-form-field-ripple{position:absolute;left:0;width:100%;transform-origin:50%;transform:scaleX(.5);opacity:0;transition:background-color .3s cubic-bezier(.55,0,.55,.2)}.mat-form-field.mat-focused .mat-form-field-ripple,.mat-form-field.mat-form-field-invalid .mat-form-field-ripple{opacity:1;transform:scaleX(1);transition:transform .3s cubic-bezier(.25,.8,.25,1),opacity .1s cubic-bezier(.25,.8,.25,1),background-color .3s cubic-bezier(.25,.8,.25,1)}.mat-form-field-subscript-wrapper{position:absolute;box-sizing:border-box;width:100%;overflow:hidden}.mat-form-field-label-wrapper .mat-icon,.mat-form-field-subscript-wrapper .mat-icon{width:1em;height:1em;font-size:inherit;vertical-align:baseline}.mat-form-field-hint-wrapper{display:flex}.mat-form-field-hint-spacer{flex:1 0 1em}.mat-error{display:block}.mat-form-field-control-wrapper{position:relative}.mat-form-field._mat-animation-noopable .mat-form-field-label,.mat-form-field._mat-animation-noopable .mat-form-field-ripple{transition:none} .mat-form-field-appearance-fill .mat-form-field-flex{border-radius:4px 4px 0 0;padding:.75em .75em 0 .75em}@media (-ms-high-contrast:active){.mat-form-field-appearance-fill .mat-form-field-flex{outline:solid 1px}}.mat-form-field-appearance-fill .mat-form-field-underline::before{content:'';display:block;position:absolute;bottom:0;height:1px;width:100%}.mat-form-field-appearance-fill .mat-form-field-ripple{bottom:0;height:2px}@media (-ms-high-contrast:active){.mat-form-field-appearance-fill .mat-form-field-ripple{height:0;border-top:solid 2px}}.mat-form-field-appearance-fill:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-underline .mat-form-field-ripple{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.25,.8,.25,1)}.mat-form-field-appearance-fill._mat-animation-noopable:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-underline .mat-form-field-ripple{transition:none}.mat-form-field-appearance-fill .mat-form-field-subscript-wrapper{padding:0 1em} .mat-input-element{font:inherit;background:0 0;color:currentColor;border:none;outline:0;padding:0;margin:0;width:100%;max-width:100%;vertical-align:bottom;text-align:inherit}.mat-input-element:-moz-ui-invalid{box-shadow:none}.mat-input-element::-ms-clear,.mat-input-element::-ms-reveal{display:none}.mat-input-element,.mat-input-element::-webkit-search-cancel-button,.mat-input-element::-webkit-search-decoration,.mat-input-element::-webkit-search-results-button,.mat-input-element::-webkit-search-results-decoration{-webkit-appearance:none}.mat-input-element::-webkit-caps-lock-indicator,.mat-input-element::-webkit-contacts-auto-fill-button,.mat-input-element::-webkit-credentials-auto-fill-button{visibility:hidden}.mat-input-element[type=date]::after,.mat-input-element[type=datetime-local]::after,.mat-input-element[type=datetime]::after,.mat-input-element[type=month]::after,.mat-input-element[type=time]::after,.mat-input-element[type=week]::after{content:' ';white-space:pre;width:1px}.mat-input-element::-webkit-calendar-picker-indicator,.mat-input-element::-webkit-clear-button,.mat-input-element::-webkit-inner-spin-button{font-size:.75em}.mat-input-element::placeholder{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-input-element::-moz-placeholder{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-input-element::-webkit-input-placeholder{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-input-element:-ms-input-placeholder{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-form-field-hide-placeholder .mat-input-element::placeholder{color:transparent!important;-webkit-text-fill-color:transparent;transition:none}.mat-form-field-hide-placeholder .mat-input-element::-moz-placeholder{color:transparent!important;-webkit-text-fill-color:transparent;transition:none}.mat-form-field-hide-placeholder .mat-input-element::-webkit-input-placeholder{color:transparent!important;-webkit-text-fill-color:transparent;transition:none}.mat-form-field-hide-placeholder .mat-input-element:-ms-input-placeholder{color:transparent!important;-webkit-text-fill-color:transparent;transition:none}textarea.mat-input-element{resize:vertical;overflow:auto}textarea.mat-input-element.cdk-textarea-autosize{resize:none}textarea.mat-input-element{padding:2px 0;margin:-2px 0}select.mat-input-element{-moz-appearance:none;-webkit-appearance:none;position:relative;background-color:transparent;display:inline-flex;box-sizing:border-box;padding-top:1em;top:-1em;margin-bottom:-1em}select.mat-input-element::-ms-expand{display:none}select.mat-input-element::-moz-focus-inner{border:0}select.mat-input-element:not(:disabled){cursor:pointer}select.mat-input-element::-ms-value{color:inherit;background:0 0}@media (-ms-high-contrast:active){.mat-focused select.mat-input-element::-ms-value{color:inherit}}.mat-form-field-type-mat-native-select .mat-form-field-infix::after{content:'';width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid;position:absolute;top:50%;right:0;margin-top:-2.5px;pointer-events:none}[dir=rtl] .mat-form-field-type-mat-native-select .mat-form-field-infix::after{right:auto;left:0}.mat-form-field-type-mat-native-select .mat-input-element{padding-right:15px}[dir=rtl] .mat-form-field-type-mat-native-select .mat-input-element{padding-right:0;padding-left:15px}.mat-form-field-type-mat-native-select .mat-form-field-label-wrapper{max-width:calc(100% - 10px)}.mat-form-field-type-mat-native-select.mat-form-field-appearance-outline .mat-form-field-infix::after{margin-top:-5px}.mat-form-field-type-mat-native-select.mat-form-field-appearance-fill .mat-form-field-infix::after{margin-top:-10px} .mat-form-field-appearance-legacy .mat-form-field-label{transform:perspective(100px);-ms-transform:none}.mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon,.mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon{width:1em}.mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon-button,.mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon-button{font:inherit;vertical-align:baseline}.mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon-button .mat-icon,.mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon-button .mat-icon{font-size:inherit}.mat-form-field-appearance-legacy .mat-form-field-underline{height:1px}@media (-ms-high-contrast:active){.mat-form-field-appearance-legacy .mat-form-field-underline{height:0;border-top:solid 1px}}.mat-form-field-appearance-legacy .mat-form-field-ripple{top:0;height:2px;overflow:hidden}@media (-ms-high-contrast:active){.mat-form-field-appearance-legacy .mat-form-field-ripple{height:0;border-top:solid 2px}}.mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline{background-position:0;background-color:transparent}@media (-ms-high-contrast:active){.mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline{border-top-style:dotted;border-top-width:2px}}.mat-form-field-appearance-legacy.mat-form-field-invalid:not(.mat-focused) .mat-form-field-ripple{height:1px} .mat-form-field-appearance-outline .mat-form-field-wrapper{margin:.25em 0}.mat-form-field-appearance-outline .mat-form-field-flex{padding:0 .75em 0 .75em;margin-top:-.25em;position:relative}.mat-form-field-appearance-outline .mat-form-field-prefix,.mat-form-field-appearance-outline .mat-form-field-suffix{top:.25em}.mat-form-field-appearance-outline .mat-form-field-outline{display:flex;position:absolute;top:.25em;left:0;right:0;bottom:0;pointer-events:none}.mat-form-field-appearance-outline .mat-form-field-outline-end,.mat-form-field-appearance-outline .mat-form-field-outline-start{border:1px solid currentColor;min-width:5px}.mat-form-field-appearance-outline .mat-form-field-outline-start{border-radius:5px 0 0 5px;border-right-style:none}[dir=rtl] .mat-form-field-appearance-outline .mat-form-field-outline-start{border-right-style:solid;border-left-style:none;border-radius:0 5px 5px 0}.mat-form-field-appearance-outline .mat-form-field-outline-end{border-radius:0 5px 5px 0;border-left-style:none;flex-grow:1}[dir=rtl] .mat-form-field-appearance-outline .mat-form-field-outline-end{border-left-style:solid;border-right-style:none;border-radius:5px 0 0 5px}.mat-form-field-appearance-outline .mat-form-field-outline-gap{border-radius:.000001px;border:1px solid currentColor;border-left-style:none;border-right-style:none}.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-outline-gap{border-top-color:transparent}.mat-form-field-appearance-outline .mat-form-field-outline-thick{opacity:0}.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end,.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start{border-width:2px;transition:border-color .3s cubic-bezier(.25,.8,.25,1)}.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline,.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline{opacity:0;transition:opacity .1s cubic-bezier(.25,.8,.25,1)}.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-thick{opacity:1}.mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline{opacity:0;transition:opacity .6s cubic-bezier(.25,.8,.25,1)}.mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline-thick{opacity:1}.mat-form-field-appearance-outline .mat-form-field-subscript-wrapper{padding:0 1em}.mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline,.mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline-end,.mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline-gap,.mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline-start,.mat-form-field-appearance-outline._mat-animation-noopable:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-outline{transition:none} .mat-form-field-appearance-standard .mat-form-field-flex{padding-top:.75em}.mat-form-field-appearance-standard .mat-form-field-underline{height:1px}@media (-ms-high-contrast:active){.mat-form-field-appearance-standard .mat-form-field-underline{height:0;border-top:solid 1px}}.mat-form-field-appearance-standard .mat-form-field-ripple{bottom:0;height:2px}@media (-ms-high-contrast:active){.mat-form-field-appearance-standard .mat-form-field-ripple{height:0;border-top:2px}}.mat-form-field-appearance-standard.mat-form-field-disabled .mat-form-field-underline{background-position:0;background-color:transparent}@media (-ms-high-contrast:active){.mat-form-field-appearance-standard.mat-form-field-disabled .mat-form-field-underline{border-top-style:dotted;border-top-width:2px}}.mat-form-field-appearance-standard:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-underline .mat-form-field-ripple{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.25,.8,.25,1)}.mat-form-field-appearance-standard._mat-animation-noopable:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-underline .mat-form-field-ripple{transition:none}</style></head>
+.hec-btn--close,
+.hec-btn--close[_ngcontent-vlh-c2] {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zaGFocnVraC5zaGFoaWQvRGVza3RvcC9IRUMvZXNlcnZpY2VzLWZyb250ZW5kL3NyYy9hcHAvc2hhcmVkL3NoYXJlZC1jb21wb25lbnRzL2hlYy1pbnB1dC9oZWMtaW5wdXQuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9zaGFyZWQtY29tcG9uZW50cy9oZWMtaW5wdXQvaGVjLWlucHV0LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7RUFDQSxXQUFBO0FDQ0o7O0FERUU7RUFDRSx5QkFBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvc2hhcmVkL3NoYXJlZC1jb21wb25lbnRzL2hlYy1pbnB1dC9oZWMtaW5wdXQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZXhhbXBsZS1jb250YWluZXIgLm1hdC1mb3JtLWZpZWxkICsgLm1hdC1mb3JtLWZpZWxkIHtcbiAgICBtYXJnaW4tbGVmdDogMHB4O1xuICAgIHdpZHRoOjEwMCU7XG4gIH1cblxuICAucmVkLWhpbnQge1xuICAgIGNvbG9yOiAjZGMzNTQ1ICFpbXBvcnRhbnQ7XG4gIH1cbiAgXG4gIC8vIC5tYXQtZm9ybS1maWVsZCB7XG4gIC8vICAgd2lkdGg6IGF1dG8gIWltcG9ydGFudDtcbiAgLy8gfVxuICBcbiAgLy8gLm1hdC1zZWxlY3QtdmFsdWUge1xuICAvLyAgIG1heC13aWR0aDogMTAwJTtcbiAgLy8gICB3aWR0aDogYXV0bztcbiAgLy8gfSIsIi5leGFtcGxlLWNvbnRhaW5lciAubWF0LWZvcm0tZmllbGQgKyAubWF0LWZvcm0tZmllbGQge1xuICBtYXJnaW4tbGVmdDogMHB4O1xuICB3aWR0aDogMTAwJTtcbn1cblxuLnJlZC1oaW50IHtcbiAgY29sb3I6ICNkYzM1NDUgIWltcG9ydGFudDtcbn0iXX0= */</style><style>.mat-form-field{display:inline-block;position:relative;text-align:left}[dir=rtl] .mat-form-field{text-align:right}.mat-form-field-wrapper{position:relative}.mat-form-field-flex{display:inline-flex;align-items:baseline;box-sizing:border-box;width:100%}.mat-form-field-prefix,.mat-form-field-suffix{white-space:nowrap;flex:none;position:relative}.mat-form-field-infix{display:block;position:relative;flex:auto;min-width:0;width:180px}@media (-ms-high-contrast:active){.mat-form-field-infix{border-image:linear-gradient(transparent,transparent)}}.mat-form-field-label-wrapper{position:absolute;left:0;box-sizing:content-box;width:100%;height:100%;overflow:hidden;pointer-events:none}[dir=rtl] .mat-form-field-label-wrapper{left:auto;right:0}.mat-form-field-label{position:absolute;left:0;font:inherit;pointer-events:none;width:100%;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;transform-origin:0 0;transition:transform .4s cubic-bezier(.25,.8,.25,1),color .4s cubic-bezier(.25,.8,.25,1),width .4s cubic-bezier(.25,.8,.25,1);display:none}[dir=rtl] .mat-form-field-label{transform-origin:100% 0;left:auto;right:0}.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,.mat-form-field-empty.mat-form-field-label{display:block}.mat-form-field-autofill-control:-webkit-autofill+.mat-form-field-label-wrapper .mat-form-field-label{display:none}.mat-form-field-can-float .mat-form-field-autofill-control:-webkit-autofill+.mat-form-field-label-wrapper .mat-form-field-label{display:block;transition:none}.mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label,.mat-input-server[placeholder]:not(:placeholder-shown)+.mat-form-field-label-wrapper .mat-form-field-label{display:none}.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label,.mat-form-field-can-float .mat-input-server[placeholder]:not(:placeholder-shown)+.mat-form-field-label-wrapper .mat-form-field-label{display:block}.mat-form-field-label:not(.mat-form-field-empty){transition:none}.mat-form-field-underline{position:absolute;width:100%;pointer-events:none;transform:scaleY(1.0001)}.mat-form-field-ripple{position:absolute;left:0;width:100%;transform-origin:50%;transform:scaleX(.5);opacity:0;transition:background-color .3s cubic-bezier(.55,0,.55,.2)}.mat-form-field.mat-focused .mat-form-field-ripple,.mat-form-field.mat-form-field-invalid .mat-form-field-ripple{opacity:1;transform:scaleX(1);transition:transform .3s cubic-bezier(.25,.8,.25,1),opacity .1s cubic-bezier(.25,.8,.25,1),background-color .3s cubic-bezier(.25,.8,.25,1)}.mat-form-field-subscript-wrapper{position:absolute;box-sizing:border-box;width:100%;overflow:hidden}.mat-form-field-label-wrapper .mat-icon,.mat-form-field-subscript-wrapper .mat-icon{width:1em;height:1em;font-size:inherit;vertical-align:baseline}.mat-form-field-hint-wrapper{display:flex}.mat-form-field-hint-spacer{flex:1 0 1em}.mat-error{display:block}.mat-form-field-control-wrapper{position:relative}.mat-form-field._mat-animation-noopable .mat-form-field-label,.mat-form-field._mat-animation-noopable .mat-form-field-ripple{transition:none} .mat-form-field-appearance-fill .mat-form-field-flex{border-radius:4px 4px 0 0;padding:.75em .75em 0 .75em}@media (-ms-high-contrast:active){.mat-form-field-appearance-fill .mat-form-field-flex{outline:solid 1px}}.mat-form-field-appearance-fill .mat-form-field-underline::before{content:'';display:block;position:absolute;bottom:0;height:1px;width:100%}.mat-form-field-appearance-fill .mat-form-field-ripple{bottom:0;height:2px}@media (-ms-high-contrast:active){.mat-form-field-appearance-fill .mat-form-field-ripple{height:0;border-top:solid 2px}}.mat-form-field-appearance-fill:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-underline .mat-form-field-ripple{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.25,.8,.25,1)}.mat-form-field-appearance-fill._mat-animation-noopable:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-underline .mat-form-field-ripple{transition:none}.mat-form-field-appearance-fill .mat-form-field-subscript-wrapper{padding:0 1em} .mat-input-element{font:inherit;background:0 0;color:currentColor;border:none;outline:0;padding:0;margin:0;width:100%;max-width:100%;vertical-align:bottom;text-align:inherit}.mat-input-element:-moz-ui-invalid{box-shadow:none}.mat-input-element::-ms-clear,.mat-input-element::-ms-reveal{display:none}.mat-input-element,.mat-input-element::-webkit-search-cancel-button,.mat-input-element::-webkit-search-decoration,.mat-input-element::-webkit-search-results-button,.mat-input-element::-webkit-search-results-decoration{-webkit-appearance:none}.mat-input-element::-webkit-caps-lock-indicator,.mat-input-element::-webkit-contacts-auto-fill-button,.mat-input-element::-webkit-credentials-auto-fill-button{visibility:hidden}.mat-input-element[type=date]::after,.mat-input-element[type=datetime-local]::after,.mat-input-element[type=datetime]::after,.mat-input-element[type=month]::after,.mat-input-element[type=time]::after,.mat-input-element[type=week]::after{content:' ';white-space:pre;width:1px}.mat-input-element::-webkit-calendar-picker-indicator,.mat-input-element::-webkit-clear-button,.mat-input-element::-webkit-inner-spin-button{font-size:.75em}.mat-input-element::placeholder{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-input-element::-moz-placeholder{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-input-element::-webkit-input-placeholder{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-input-element:-ms-input-placeholder{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;transition:color .4s .133s cubic-bezier(.25,.8,.25,1)}.mat-form-field-hide-placeholder .mat-input-element::placeholder{color:transparent!important;-webkit-text-fill-color:transparent;transition:none}.mat-form-field-hide-placeholder .mat-input-element::-moz-placeholder{color:transparent!important;-webkit-text-fill-color:transparent;transition:none}.mat-form-field-hide-placeholder .mat-input-element::-webkit-input-placeholder{color:transparent!important;-webkit-text-fill-color:transparent;transition:none}.mat-form-field-hide-placeholder .mat-input-element:-ms-input-placeholder{color:transparent!important;-webkit-text-fill-color:transparent;transition:none}textarea.mat-input-element{resize:vertical;overflow:auto}textarea.mat-input-element.cdk-textarea-autosize{resize:none}textarea.mat-input-element{padding:2px 0;margin:-2px 0}select.mat-input-element{-moz-appearance:none;-webkit-appearance:none;position:relative;background-color:transparent;display:inline-flex;box-sizing:border-box;padding-top:1em;top:-1em;margin-bottom:-1em}select.mat-input-element::-ms-expand{display:none}select.mat-input-element::-moz-focus-inner{border:0}select.mat-input-element:not(:disabled){cursor:pointer}select.mat-input-element::-ms-value{color:inherit;background:0 0}@media (-ms-high-contrast:active){.mat-focused select.mat-input-element::-ms-value{color:inherit}}.mat-form-field-type-mat-native-select .mat-form-field-infix::after{content:'';width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid;position:absolute;top:50%;right:0;margin-top:-2.5px;pointer-events:none}[dir=rtl] .mat-form-field-type-mat-native-select .mat-form-field-infix::after{right:auto;left:0}.mat-form-field-type-mat-native-select .mat-input-element{padding-right:15px}[dir=rtl] .mat-form-field-type-mat-native-select .mat-input-element{padding-right:0;padding-left:15px}.mat-form-field-type-mat-native-select .mat-form-field-label-wrapper{max-width:calc(100% - 10px)}.mat-form-field-type-mat-native-select.mat-form-field-appearance-outline .mat-form-field-infix::after{margin-top:-5px}.mat-form-field-type-mat-native-select.mat-form-field-appearance-fill .mat-form-field-infix::after{margin-top:-10px} .mat-form-field-appearance-legacy .mat-form-field-label{transform:perspective(100px);-ms-transform:none}.mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon,.mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon{width:1em}.mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon-button,.mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon-button{font:inherit;vertical-align:baseline}.mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon-button .mat-icon,.mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon-button .mat-icon{font-size:inherit}.mat-form-field-appearance-legacy .mat-form-field-underline{height:1px}@media (-ms-high-contrast:active){.mat-form-field-appearance-legacy .mat-form-field-underline{height:0;border-top:solid 1px}}.mat-form-field-appearance-legacy .mat-form-field-ripple{top:0;height:2px;overflow:hidden}@media (-ms-high-contrast:active){.mat-form-field-appearance-legacy .mat-form-field-ripple{height:0;border-top:solid 2px}}.mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline{background-position:0;background-color:transparent}@media (-ms-high-contrast:active){.mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline{border-top-style:dotted;border-top-width:2px}}.mat-form-field-appearance-legacy.mat-form-field-invalid:not(.mat-focused) .mat-form-field-ripple{height:1px} .mat-form-field-appearance-outline .mat-form-field-wrapper{margin:.25em 0}.mat-form-field-appearance-outline .mat-form-field-flex{padding:0 .75em 0 .75em;margin-top:-.25em;position:relative}.mat-form-field-appearance-outline .mat-form-field-prefix,.mat-form-field-appearance-outline .mat-form-field-suffix{top:.25em}.mat-form-field-appearance-outline .mat-form-field-outline{display:flex;position:absolute;top:.25em;left:0;right:0;bottom:0;pointer-events:none}.mat-form-field-appearance-outline .mat-form-field-outline-end,.mat-form-field-appearance-outline .mat-form-field-outline-start{border:1px solid currentColor;min-width:5px}.mat-form-field-appearance-outline .mat-form-field-outline-start{border-radius:5px 0 0 5px;border-right-style:none}[dir=rtl] .mat-form-field-appearance-outline .mat-form-field-outline-start{border-right-style:solid;border-left-style:none;border-radius:0 5px 5px 0}.mat-form-field-appearance-outline .mat-form-field-outline-end{border-radius:0 5px 5px 0;border-left-style:none;flex-grow:1}[dir=rtl] .mat-form-field-appearance-outline .mat-form-field-outline-end{border-left-style:solid;border-right-style:none;border-radius:5px 0 0 5px}.mat-form-field-appearance-outline .mat-form-field-outline-gap{border-radius:.000001px;border:1px solid currentColor;border-left-style:none;border-right-style:none}.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-outline-gap{border-top-color:transparent}.mat-form-field-appearance-outline .mat-form-field-outline-thick{opacity:0}.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end,.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,.mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start{border-width:2px;transition:border-color .3s cubic-bezier(.25,.8,.25,1)}.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline,.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline{opacity:0;transition:opacity .1s cubic-bezier(.25,.8,.25,1)}.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,.mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-thick{opacity:1}.mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline{opacity:0;transition:opacity .6s cubic-bezier(.25,.8,.25,1)}.mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline-thick{opacity:1}.mat-form-field-appearance-outline .mat-form-field-subscript-wrapper{padding:0 1em}.mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline,.mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline-end,.mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline-gap,.mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline-start,.mat-form-field-appearance-outline._mat-animation-noopable:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-outline{transition:none} .mat-form-field-appearance-standard .mat-form-field-flex{padding-top:.75em}.mat-form-field-appearance-standard .mat-form-field-underline{height:1px}@media (-ms-high-contrast:active){.mat-form-field-appearance-standard .mat-form-field-underline{height:0;border-top:solid 1px}}.mat-form-field-appearance-standard .mat-form-field-ripple{bottom:0;height:2px}@media (-ms-high-contrast:active){.mat-form-field-appearance-standard .mat-form-field-ripple{height:0;border-top:2px}}.mat-form-field-appearance-standard.mat-form-field-disabled .mat-form-field-underline{background-position:0;background-color:transparent}@media (-ms-high-contrast:active){.mat-form-field-appearance-standard.mat-form-field-disabled .mat-form-field-underline{border-top-style:dotted;border-top-width:2px}}.mat-form-field-appearance-standard:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-underline .mat-form-field-ripple{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.25,.8,.25,1)}.mat-form-field-appearance-standard._mat-animation-noopable:not(.mat-form-field-disabled) .mat-form-field-flex:hover~.mat-form-field-underline .mat-form-field-ripple{transition:none}</style>
+<!-- PREVIOUS_BACKUP_START: hec-perfect-material-styles
+<style id="hec-perfect-material-styles">
+  /* Global Typography */
+  body, button, input, select, textarea, .hec-public-title, .hec-public-lead, .hec-panel-title, .mat-form-field {
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .hec-panel {
+    background: #ffffff !important;
+    border: 1px solid #ebedf2 !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+  }
+  .hec-panel-head {
+    background: #ffffff !important;
+    border-bottom: 1px solid #ebedf2 !important;
+    padding: 1rem 1.25rem !important;
+  }
+  .hec-panel-title {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: #3f4b57 !important;
+  }
+
+  /* Form Field Geometry */
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0.25em 0 1.25em 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0 0.75em 0 0.75em !important;
+    margin-top: -0.25em !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    min-height: 52px !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.85em 0 0.85em 0 !important;
+    border-top: 0.84375em solid transparent !important;
+    position: relative !important;
+    flex: auto !important;
+    min-width: 0 !important;
+    width: 180px !important;
+  }
+  .mat-input-element {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #3f4b57 !important;
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+  }
+  .mat-form-field-hide-placeholder .mat-input-element::placeholder {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+  .mat-form-field:not(.mat-form-field-hide-placeholder) .mat-input-element::placeholder {
+    color: #a0a5ba !important;
+    -webkit-text-fill-color: #a0a5ba !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+  }
+
+  /* Outlines */
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    display: flex !important;
+    position: absolute !important;
+    top: 0.25em !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    pointer-events: none !important;
+    color: #ebedf2 !important;
+    border-radius: 4px !important;
+    transition: color 0.2s ease !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border: 1px solid currentColor !important;
+    border-right-style: none !important;
+    border-radius: 4px 0 0 4px !important;
+    width: 5px !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-gap {
+    border: 1px solid currentColor !important;
+    border-left-style: none !important;
+    border-right-style: none !important;
+    border-top-style: solid !important;
+    transition: border-top-color 0.2s ease, width 0.2s ease !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border: 1px solid currentColor !important;
+    border-left-style: none !important;
+    border-radius: 0 4px 4px 0 !important;
+    flex-grow: 1 !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    opacity: 0 !important;
+    display: flex !important;
+    position: absolute !important;
+    top: 0.25em !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    pointer-events: none !important;
+    border-radius: 4px !important;
+    transition: opacity 0.2s ease, color 0.2s ease !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start,
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end {
+    border-width: 2px !important;
+  }
+
+  /* Hover State (unfocused, non-invalid): outline darkens and does not disappear */
+  .mat-form-field-appearance-outline:not(.mat-form-field-disabled):not(.mat-focused):not(.mat-form-field-invalid) .mat-form-field-flex:hover .mat-form-field-outline-thick,
+  .mat-form-field-appearance-outline:not(.mat-form-field-disabled):not(.mat-focused):not(.mat-form-field-invalid):hover .mat-form-field-outline-thick {
+    opacity: 1 !important;
+    color: #3f4b57 !important;
+  }
+  .mat-form-field-appearance-outline:not(.mat-form-field-disabled):not(.mat-focused):not(.mat-form-field-invalid) .mat-form-field-flex:hover .mat-form-field-outline:not(.mat-form-field-outline-thick),
+  .mat-form-field-appearance-outline:not(.mat-form-field-disabled):not(.mat-focused):not(.mat-form-field-invalid):hover .mat-form-field-outline:not(.mat-form-field-outline-thick) {
+    opacity: 0 !important;
+  }
+
+  /* Focused State: Green outline */
+  .mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid) .mat-form-field-outline {
+    opacity: 0 !important;
+  }
+  .mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid) .mat-form-field-outline-thick {
+    opacity: 1 !important;
+    color: #1bb55e !important;
+  }
+  .mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid) .mat-form-field-outline-thick .mat-form-field-outline-gap {
+    border-top-color: transparent !important;
+  }
+
+  /* Invalid State: Red outline */
+  .mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline {
+    opacity: 0 !important;
+  }
+  .mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-thick {
+    opacity: 1 !important;
+    color: #dc3545 !important;
+  }
+
+  /* Gap Open/Close Behavior */
+  /* When focused or floated: gap is transparent */
+  .mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-outline-thick .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-gap {
+    border-top-color: transparent !important;
+  }
+  /* When invalid but NOT focused and empty: notch gap is CLOSED (solid red border across top) */
+  .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-empty:not(.mat-focused) .mat-form-field-outline-thick .mat-form-field-outline-gap {
+    border-top-color: currentColor !important;
+  }
+
+  /* Labels */
+  .mat-form-field-appearance-outline .mat-form-field-label-wrapper {
+    position: absolute !important;
+    left: 0 !important;
+    box-sizing: content-box !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    top: -0.84375em !important;
+    padding-top: 0.84375em !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-label {
+    top: 1.84375em !important;
+    margin-top: -0.25em !important;
+    left: 0 !important;
+    position: absolute !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+    pointer-events: none !important;
+    transform-origin: 0 0 !important;
+    transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    display: inline-block !important;
+    width: auto !important;
+    padding: 0 4px !important;
+  }
+
+  /* Resting Label (when empty and unfocused) */
+  .mat-form-field-appearance-outline.mat-form-field-empty:not(.mat-focused):not(.mat-form-field-should-float) .mat-form-field-label {
+    transform: none !important;
+    background-color: transparent !important;
+  }
+  /* Unfocused Invalid Resting Label: Red inside box */
+  .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-empty:not(.mat-focused):not(.mat-form-field-should-float) .mat-form-field-label {
+    color: #dc3545 !important;
+  }
+
+  /* Floating Label: Floated Up */
+  .mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-label,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+    transform: translateY(-1.42em) scale(0.75) !important;
+    width: auto !important;
+    background-color: transparent !important;
+    font-weight: 600 !important;
+    z-index: 2 !important;
+  }
+
+  /* Label Colors */
+  /* Focused: Green even if invalid (matches official portal) */
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-label,
+  .mat-form-field-appearance-outline.mat-focused.mat-form-field-invalid .mat-form-field-label {
+    color: #1bb55e !important;
+  }
+  .mat-form-field-appearance-outline:not(.mat-focused).mat-form-field-invalid .mat-form-field-label {
+    color: #dc3545 !important;
+  }
+  /* Floated & Unfocused (Non-empty): Soft gray */
+  .mat-form-field-appearance-outline.mat-form-field-should-float:not(.mat-focused):not(.mat-form-field-invalid) .mat-form-field-label {
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+
+  mat-label {
+    font-family: 'Montserrat', sans-serif !important;
+    display: inline !important;
+    font-size: inherit !important;
+    color: inherit !important;
+  }
+  .mat-placeholder-required,
+  .mat-form-field-required-marker {
+    color: inherit !important;
+    font-weight: 600 !important;
+    margin-left: 2px !important;
+    display: inline !important;
+  }
+  .mat-form-field-invalid .mat-placeholder-required,
+  .mat-form-field-invalid .mat-form-field-required-marker {
+    color: #dc3545 !important;
+  }
+
+  /* Hints and Errors: Full Visibility, ZERO Clipping */
+  .mat-form-field-subscript-wrapper {
+    position: static !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    overflow: visible !important;
+    font-size: 11px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    padding: 0 1em !important;
+    margin-top: 6px !important;
+    min-height: 20px !important;
+    line-height: 1.4 !important;
+  }
+  .mat-form-field-hint-wrapper,
+  .mat-form-field-error-wrapper {
+    overflow: visible !important;
+  }
+  .mat-form-field .mat-hint,
+  .mat-form-field-appearance-outline .mat-hint,
+  .mat-hint {
+    color: #3f4b57 !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    display: inline-block !important;
+    opacity: 1 !important;
+  }
+  .mat-error,
+  .mat-form-field-invalid .mat-error {
+    color: #dc3545 !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    font-weight: 500 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    display: inline-block !important;
+  }
+
+  /* Captcha Block - Exact Official Live HEC Portal Specs */
+  .hec-captcha-block,
+  .hec-captcha-block[_ngcontent-wnm-c2],
+  .hec-captcha-block[_ngcontent-vlh-c2] {
+    margin: 1.25rem 0 1.35rem !important;
+    padding: 1rem 1rem 1.1rem !important;
+    background: #fafbfc !important;
+    border: 1px dashed #d1dbe2 !important;
+    border-radius: 8px !important;
+  }
+  .hec-captcha-label,
+  .hec-captcha-label[_ngcontent-wnm-c2],
+  .hec-captcha-label[_ngcontent-vlh-c2] {
+    display: block !important;
+    margin-bottom: 0.65rem !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: #6b7c89 !important;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  /* Toolbar Buttons */
+  .hec-toolbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-top: 15px !important;
+  }
+  .hec-toolbar-secondary {
+    display: flex !important;
+    gap: 8px !important;
+  }
+  .hec-btn {
+    padding: 0.65rem 1.75rem !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    border-radius: 4px !important;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer !important;
+    font-family: 'Montserrat', sans-serif !important;
+    transition: all 0.2s ease !important;
+  }
+  .hec-btn--primary[disabled],
+  .hec-btn--primary.mat-button-disabled {
+    background-color: #9fe0ba !important;
+    color: #ffffff !important;
+    opacity: 0.65 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+  }
+  .hec-btn--primary:not([disabled]):not(.mat-button-disabled) {
+    background-color: #1bb55e !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+  .hec-btn--reset {
+    background-color: #e28a17 !important;
+    color: #ffffff !important;
+  }
+  .hec-btn--reset:hover {
+    background-color: #d17c10 !important;
+  }
+  .hec-btn--close {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+  }
+  .hec-btn--close:hover {
+    background-color: #c82333 !important;
+  }
+  .btnsrowkm .mat-raised-button {
+    border: 1px solid transparent !important;
+  }
+  .btnsrowkm .mat-raised-button:hover {
+    background-color: #ffffff !important;
+    border: 1px solid #1bb55e !important;
+    color: #1bb55e !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+  }
+</style>
+PREVIOUS_BACKUP_END -->
+<style id="hec-perfect-material-styles">
+  /* Global Typography - Official HEC Montserrat */
+  body, button, input, select, textarea, .hec-public-title, .hec-public-lead, .hec-panel-title, .mat-form-field {
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  /* --- Panels (search / results) - EXACT OFFICIAL LIVE HEC SPECS --- */
+  .hec-panel,
+  .hec-panel[_ngcontent-vlh-c2],
+  .hec-panel[_ngcontent-wnm-c2],
+  .hec-panel[_ngcontent-xws-c2] {
+    background: #ffffff !important;
+    border: 1px solid #e4eaee !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 18px rgba(15, 34, 58, 0.06) !important;
+    margin-bottom: 1.5rem !important;
+    overflow: hidden !important;
+  }
+  .hec-panel--results {
+    margin-top: 0.5rem !important;
+  }
+  .hec-panel-head,
+  .hec-panel-head[_ngcontent-vlh-c2],
+  .hec-panel-head[_ngcontent-wnm-c2],
+  .hec-panel-head[_ngcontent-xws-c2] {
+    padding: 0.85rem 1.25rem !important;
+    background: linear-gradient(180deg, #f4faf6 0%, #ffffff 100%) !important;
+    border-bottom: 1px solid #e4eaee !important;
+  }
+  .hec-panel-head--split {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.75rem !important;
+  }
+  .hec-panel-title,
+  .hec-panel-title[_ngcontent-vlh-c2],
+  .hec-panel-title[_ngcontent-wnm-c2],
+  .hec-panel-title[_ngcontent-xws-c2] {
+    margin: 0 !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #3f4b57 !important;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .hec-panel-body,
+  .hec-panel-body[_ngcontent-vlh-c2],
+  .hec-panel-body[_ngcontent-wnm-c2],
+  .hec-panel-body[_ngcontent-xws-c2] {
+    padding: 1.25rem 1.25rem 1.35rem !important;
+  }
+  .hec-form-grid {
+    margin-bottom: 0.25rem !important;
+  }
+
+  /* Form Field Geometry */
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0.25em 0 1.25em 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0 0.75em 0 0.75em !important;
+    margin-top: -0.25em !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    min-height: 52px !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.85em 0 0.85em 0 !important;
+    border-top: 0.84375em solid transparent !important;
+    position: relative !important;
+    flex: auto !important;
+    min-width: 0 !important;
+    width: 180px !important;
+  }
+  .mat-input-element {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #3f4b57 !important;
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+  }
+  .mat-form-field-hide-placeholder .mat-input-element::placeholder {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+  .mat-form-field:not(.mat-form-field-hide-placeholder) .mat-input-element::placeholder {
+    color: #a0a5ba !important;
+    -webkit-text-fill-color: #a0a5ba !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+  }
+
+  /* Outlines */
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    display: flex !important;
+    position: absolute !important;
+    top: 0.25em !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    pointer-events: none !important;
+    color: #ebedf2 !important;
+    border-radius: 4px !important;
+    transition: color 0.2s ease !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border: 1px solid currentColor !important;
+    border-right-style: none !important;
+    border-radius: 4px 0 0 4px !important;
+    width: 5px !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-gap {
+    border: 1px solid currentColor !important;
+    border-left-style: none !important;
+    border-right-style: none !important;
+    border-top-style: solid !important;
+    transition: border-top-color 0.2s ease, width 0.2s ease !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border: 1px solid currentColor !important;
+    border-left-style: none !important;
+    border-radius: 0 4px 4px 0 !important;
+    flex-grow: 1 !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    opacity: 0 !important;
+    display: flex !important;
+    position: absolute !important;
+    top: 0.25em !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    pointer-events: none !important;
+    border-radius: 4px !important;
+    transition: opacity 0.2s ease, color 0.2s ease !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start,
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end {
+    border-width: 2px !important;
+  }
+
+  /* Hover State: Darker & prominent outline */
+  .mat-form-field-appearance-outline:not(.mat-form-field-disabled):not(.mat-form-field-invalid):not(.mat-focused) .mat-form-field-flex:hover .mat-form-field-outline-thick {
+    opacity: 1 !important;
+    color: #3f4b57 !important;
+  }
+  .mat-form-field-appearance-outline:not(.mat-form-field-disabled):not(.mat-form-field-invalid):not(.mat-focused) .mat-form-field-flex:hover .mat-form-field-outline-thick .mat-form-field-outline-gap {
+    border-top-color: currentColor !important;
+  }
+
+  /* Focused State: Green outline */
+  .mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid) .mat-form-field-outline {
+    opacity: 0 !important;
+  }
+  .mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid) .mat-form-field-outline-thick {
+    opacity: 1 !important;
+    color: #1bb55e !important;
+  }
+  .mat-form-field-appearance-outline.mat-focused:not(.mat-form-field-invalid) .mat-form-field-outline-thick .mat-form-field-outline-gap {
+    border-top-color: transparent !important;
+  }
+
+  /* Invalid State: Red outline */
+  .mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline {
+    opacity: 0 !important;
+  }
+  .mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-thick {
+    opacity: 1 !important;
+    color: #dc3545 !important;
+  }
+
+  /* Gap Open/Close Behavior */
+  .mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-outline-thick .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-gap {
+    border-top-color: transparent !important;
+  }
+  .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-empty:not(.mat-focused) .mat-form-field-outline-thick .mat-form-field-outline-gap {
+    border-top-color: currentColor !important;
+  }
+
+  /* Labels */
+  .mat-form-field-appearance-outline .mat-form-field-label-wrapper {
+    position: absolute !important;
+    left: 0 !important;
+    box-sizing: content-box !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    top: -0.84375em !important;
+    padding-top: 0.84375em !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-label {
+    top: 1.84375em !important;
+    margin-top: -0.25em !important;
+    left: 0 !important;
+    position: absolute !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+    pointer-events: none !important;
+    transform-origin: 0 0 !important;
+    transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    display: inline-block !important;
+    width: auto !important;
+    padding: 0 4px !important;
+  }
+
+  /* Resting Label (when empty and unfocused) */
+  .mat-form-field-appearance-outline.mat-form-field-empty:not(.mat-focused):not(.mat-form-field-should-float) .mat-form-field-label {
+    transform: none !important;
+    background-color: transparent !important;
+  }
+  .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-empty:not(.mat-focused):not(.mat-form-field-should-float) .mat-form-field-label {
+    color: #dc3545 !important;
+  }
+
+  /* Floating Label: Floated Up */
+  .mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-label,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+    transform: translateY(-1.42em) scale(0.75) !important;
+    width: auto !important;
+    background-color: transparent !important;
+    font-weight: 600 !important;
+    z-index: 2 !important;
+  }
+
+  /* Label Colors */
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-label,
+  .mat-form-field-appearance-outline.mat-focused.mat-form-field-invalid .mat-form-field-label {
+    color: #1bb55e !important;
+  }
+  .mat-form-field-appearance-outline:not(.mat-focused).mat-form-field-invalid .mat-form-field-label {
+    color: #dc3545 !important;
+  }
+  .mat-form-field-appearance-outline.mat-form-field-should-float:not(.mat-focused):not(.mat-form-field-invalid) .mat-form-field-label {
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+
+  mat-label {
+    font-family: 'Montserrat', sans-serif !important;
+    display: inline !important;
+    font-size: inherit !important;
+    color: inherit !important;
+  }
+  .mat-placeholder-required,
+  .mat-form-field-required-marker {
+    color: inherit !important;
+    font-weight: 600 !important;
+    margin-left: 2px !important;
+    display: inline !important;
+  }
+  .mat-form-field-invalid .mat-placeholder-required,
+  .mat-form-field-invalid .mat-form-field-required-marker {
+    color: #dc3545 !important;
+  }
+
+  /* Hints and Errors: Full Visibility, ZERO Clipping */
+  .mat-form-field-subscript-wrapper {
+    position: static !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    overflow: visible !important;
+    font-size: 11px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    padding: 0 1em !important;
+    margin-top: 6px !important;
+    min-height: 20px !important;
+    line-height: 1.4 !important;
+  }
+  .mat-form-field-hint-wrapper,
+  .mat-form-field-error-wrapper {
+    overflow: visible !important;
+  }
+  .mat-form-field .mat-hint,
+  .mat-form-field-appearance-outline .mat-hint,
+  .mat-hint {
+    color: #3f4b57 !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    display: inline-block !important;
+    opacity: 1 !important;
+  }
+  .mat-error,
+  .mat-form-field-invalid .mat-error {
+    color: #dc3545 !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    font-weight: 500 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    display: inline-block !important;
+  }
+
+  /* Captcha Block - Exact Official Live HEC Portal Specs */
+  .hec-captcha-block,
+  .hec-captcha-block[_ngcontent-wnm-c2],
+  .hec-captcha-block[_ngcontent-vlh-c2],
+  .hec-captcha-block[_ngcontent-xws-c2] {
+    margin: 1.25rem 0 1.35rem !important;
+    padding: 1rem 1rem 1.1rem !important;
+    background: #fafbfc !important;
+    border: 1px dashed #d1dbe2 !important;
+    border-radius: 8px !important;
+  }
+  .hec-captcha-label,
+  .hec-captcha-label[_ngcontent-wnm-c2],
+  .hec-captcha-label[_ngcontent-vlh-c2],
+  .hec-captcha-label[_ngcontent-xws-c2] {
+    display: block !important;
+    margin-bottom: 0.65rem !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: #6b7c89 !important;
+    font-family: 'Montserrat', sans-serif !important;
+  }
+
+  /* --- Toolbar & buttons - EXACT OFFICIAL LIVE HEC SPECS --- */
+  .hec-toolbar,
+  .hec-toolbar[_ngcontent-vlh-c2],
+  .hec-toolbar[_ngcontent-wnm-c2],
+  .hec-toolbar[_ngcontent-xws-c2] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+    padding-top: 0.75rem !important;
+    border-top: 1px solid #e4eaee !important;
+    margin-top: 1rem !important;
+  }
+  .hec-toolbar-primary,
+  .hec-toolbar-secondary {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+  .hec-btn,
+  .hec-btn[_ngcontent-vlh-c2],
+  .hec-btn[_ngcontent-wnm-c2],
+  .hec-btn[_ngcontent-xws-c2] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 40px !important;
+    padding: 0 2.65rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: 1px solid transparent !important;
+    cursor: pointer !important;
+    font-family: 'Montserrat', sans-serif !important;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  .hec-btn--primary {
+    color: #fff !important;
+    background: #1bb55e !important;
+    border-color: #1bb55e !important;
+    box-shadow: 0 2px 8px rgba(27, 181, 94, 0.35) !important;
+  }
+  .hec-btn--primary:hover:not(:disabled) {
+    background: #159c52 !important;
+    border-color: #159c52 !important;
+  }
+  .hec-btn--primary:disabled,
+  .hec-btn--primary[disabled],
+  .hec-btn--primary.mat-button-disabled {
+    opacity: 0.45 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    background: #1bb55e !important;
+    color: #fff !important;
+    pointer-events: none !important;
+  }
+  .hec-btn--reset {
+    color: #fff !important;
+    background: #e8940c !important;
+    border-color: #d9820a !important;
+    box-shadow: 0 2px 6px rgba(232, 148, 12, 0.35) !important;
+  }
+  .hec-btn--reset:hover {
+    background: #cf8208 !important;
+    border-color: #b87407 !important;
+  }
+  .hec-btn--close {
+    color: #fff !important;
+    background: #dc3545 !important;
+    border-color: #c82333 !important;
+    box-shadow: 0 2px 6px rgba(220, 53, 69, 0.3) !important;
+  }
+  .hec-btn--close:hover {
+    background: #c82333 !important;
+    border-color: #bd2130 !important;
+  }
+  .btnsrowkm .mat-raised-button {
+    border: 1px solid transparent !important;
+  }
+  .btnsrowkm .mat-raised-button:hover {
+    background-color: #ffffff !important;
+    border: 1px solid #1bb55e !important;
+    color: #1bb55e !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+  }
+
+  /* --- EXACT RESTING INVALID STATE MATCHING OFFICIAL PORTAL --- */
+  .mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline,
+  .mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-thick {
+    color: #ff2346 !important;
+    opacity: 1 !important;
+  }
+  .mat-form-field-appearance-outline.mat-form-field-invalid:not(.mat-focused) .mat-form-field-outline,
+  /* --- EXACT LIVE SITE STYLES (MATCHED TO eservices.hec.gov.pk) --- */
+  .mat-form-field-appearance-outline input.mat-input-element {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: rgba(51, 51, 51, 0.85) !important;
+    caret-color: #009049 !important;
+  }
+  .mat-form-field-appearance-outline input::placeholder {
+    color: transparent !important;
+    opacity: 0 !important;
+  }
+
+  /* 1. Default Resting / Idle Outline & Label */
+  .mat-form-field-appearance-outline:not(.mat-focused) .mat-form-field-outline-thick {
+    opacity: 0 !important;
+    display: none !important;
+  }
+  .mat-form-field-appearance-outline:not(.mat-focused):not(.mat-form-field-invalid) .mat-form-field-outline {
+    color: rgba(0, 0, 0, 0.65) !important;
+    opacity: 1 !important;
+  }
+  .mat-form-field-appearance-outline:not(.mat-focused):not(.mat-form-field-invalid) .mat-form-field-outline-start,
+  .mat-form-field-appearance-outline:not(.mat-focused):not(.mat-form-field-invalid) .mat-form-field-outline-end {
+    border-color: rgba(0, 0, 0, 0.65) !important;
+    border-width: 1px !important;
+  }
+  .mat-form-field-appearance-outline:not(.mat-form-field-should-float):not(.mat-focused):not(.mat-form-field-invalid) .mat-form-field-outline-gap {
+    border-color: rgba(0, 0, 0, 0.65) !important;
+    border-width: 1px !important;
+  }
+  /* CRITICAL: When field should float (text typed or focused), top border of gap MUST be transparent to create the notch! */
+  .mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-outline-thick .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-gap,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-gap {
+    border-top: none !important;
+    border-top-color: transparent !important;
+    border-top-width: 0 !important;
+  }
+
+  /* Gap min-width to ensure the floating label fits cleanly into the notch */
+  .mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-outline-gap {
+    min-width: 125px !important;
+  }
+  .mat-form-field-appearance-outline:first-of-type.mat-form-field-should-float .mat-form-field-outline-gap {
+    min-width: 145px !important;
+  }
+
+  /* 2. Floating Label Position (Exact live site notch alignment) */
+  .mat-form-field-appearance-outline.mat-form-field-should-float .mat-form-field-label,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+    transform: translateY(-1.7em) scale(0.75) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    z-index: 3 !important;
+  }
+
+  .mat-form-field-appearance-outline:not(.mat-focused):not(.mat-form-field-invalid) .mat-form-field-label,
+  .mat-form-field-appearance-outline:not(.mat-focused):not(.mat-form-field-invalid) mat-label {
+    color: rgba(0, 0, 0, 0.6) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+  }
+  .mat-form-field-appearance-outline.mat-form-field-should-float:not(.mat-focused):not(.mat-form-field-invalid) .mat-form-field-label {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
+  .mat-form-field-appearance-outline:not(.mat-focused):not(.mat-form-field-invalid) .mat-placeholder-required {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
+
+  /* 3. Focused State (Crisp Green Outline) */
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+    opacity: 0 !important;
+  }
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: rgb(27, 181, 94) !important;
+    opacity: 1 !important;
+    display: flex !important;
+  }
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-start,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-end {
+    border-color: rgb(27, 181, 94) !important;
+    border-width: 2px !important;
+  }
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-gap {
+    border-color: rgb(27, 181, 94) !important;
+    border-width: 2px !important;
+    border-top: none !important;
+    border-top-color: transparent !important;
+    border-top-width: 0 !important;
+  }
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-label,
+  .mat-form-field-appearance-outline.mat-focused mat-label {
+    color: rgb(0, 144, 73) !important;
+    font-weight: 600 !important;
+  }
+
+  /* 4. Error / Invalid State (Crisp Red Outline only when empty/unfloated) */
+  .mat-form-field-appearance-outline.mat-form-field-invalid:not(.mat-form-field-should-float):not(.mat-focused) .mat-form-field-outline {
+    color: rgb(255, 35, 70) !important;
+    opacity: 1 !important;
+  }
+  .mat-form-field-appearance-outline.mat-form-field-invalid:not(.mat-form-field-should-float):not(.mat-focused) .mat-form-field-outline-start,
+  .mat-form-field-appearance-outline.mat-form-field-invalid:not(.mat-form-field-should-float):not(.mat-focused) .mat-form-field-outline-end,
+  .mat-form-field-appearance-outline.mat-form-field-invalid:not(.mat-form-field-should-float):not(.mat-focused) .mat-form-field-outline-gap {
+    border-color: rgb(255, 35, 70) !important;
+    border-width: 1px !important;
+  }
+  .mat-form-field-appearance-outline.mat-form-field-invalid:not(.mat-form-field-should-float) .mat-form-field-label,
+  .mat-form-field-appearance-outline.mat-form-field-invalid:not(.mat-form-field-should-float) mat-label,
+  .mat-form-field-appearance-outline.mat-form-field-invalid:not(.mat-form-field-should-float) .mat-placeholder-required {
+    color: rgb(244, 67, 54) !important;
+  }
+  .mat-form-field-invalid .mat-error,
+  .mat-form-field-appearance-outline.mat-form-field-invalid:not(.mat-form-field-should-float) .mat-error {
+    color: rgb(244, 67, 54) !important;
+    font-size: 8.16px !important;
+    font-weight: 500 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    margin-top: 2px !important;
+    display: block !important;
+  }
+
+  /* 4. Hints */
+  .mat-form-field .mat-hint,
+  .mat-form-field-appearance-outline .mat-hint,
+  .mat-hint {
+    color: #6b7c89 !important;
+    font-weight: 500 !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .mat-form-field-hint-wrapper {
+    display: flex !important;
+    opacity: 1 !important;
+  }
+</style></head>
 
 <body kt-root="" _nghost-vlh-c0="" class="ng-tns-0-0 kt-page--loaded" ng-version="8.2.14" cz-shortcut-listen="true"><!--bindings={
   "ng-reflect-ng-if": "true"
@@ -85948,13 +86882,13 @@ mat-label,
   "ng-reflect-ng-switch-case": "text"
 }--><!----><!--bindings={
   "ng-reflect-ng-template-outlet": "[object Object]"
-}--><div class="form-group example-container testltr ng-star-inserted" ng-reflect-klass="form-group example-container" ng-reflect-ng-class="testltr" ng-reflect-dir="ltr" dir="ltr"><mat-form-field appearance="outline" class="example-full-width mat-form-field ng-tns-c4-1 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-outline mat-form-field-can-float mat-form-field-has-label mat-form-field-should-float" ng-reflect-appearance="outline"><div class="mat-form-field-wrapper"><div class="mat-form-field-flex"><!--bindings={
+}--><div class="form-group example-container testltr ng-star-inserted" ng-reflect-klass="form-group example-container" ng-reflect-ng-class="testltr" ng-reflect-dir="ltr" dir="ltr"><mat-form-field appearance="outline" class="example-full-width mat-form-field ng-tns-c4-1 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-outline mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder" ng-reflect-appearance="outline"><div class="mat-form-field-wrapper"><div class="mat-form-field-flex"><!--bindings={
   "ng-reflect-ng-if": "true"
-}--><!----><div class="mat-form-field-outline ng-tns-c4-1 ng-star-inserted"><div class="mat-form-field-outline-start" style="width: 5px;"></div><div class="mat-form-field-outline-gap" style="width: 144px;"></div><div class="mat-form-field-outline-end"></div></div><div class="mat-form-field-outline mat-form-field-outline-thick ng-tns-c4-1 ng-star-inserted"><div class="mat-form-field-outline-start" style="width: 5px;"></div><div class="mat-form-field-outline-gap" style="width: 144px;"></div><div class="mat-form-field-outline-end"></div></div><!--bindings={
+}--><!----><div class="mat-form-field-outline ng-tns-c4-1 ng-star-inserted"><div class="mat-form-field-outline-start" style="width: 4px;"></div><div class="mat-form-field-outline-gap" style="width: 129.25px;"></div><div class="mat-form-field-outline-end"></div></div><div class="mat-form-field-outline mat-form-field-outline-thick ng-tns-c4-1 ng-star-inserted"><div class="mat-form-field-outline-start" style="width: 4px;"></div><div class="mat-form-field-outline-gap" style="width: 129.25px;"></div><div class="mat-form-field-outline-end"></div></div><!--bindings={
   "ng-reflect-ng-if": "0"
-}--><div class="mat-form-field-infix"><input autocomplete="off" class="hec-element mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored" matinput="" pattern="\S+.*" preventcutcopypaste="" text="" title="This field is required" ng-reflect-required="true" ng-reflect-minlength="1" ng-reflect-maxlength="13" ng-reflect-pattern="\S+.*" ng-reflect-name="cnic" ng-reflect-placeholder="CNIC / Passport number" ng-reflect-readonly="false" ng-reflect-copy-allowed="true" required minlength="1" maxlength="13" id="mat-input-0" aria-describedby="mat-hint-0" aria-invalid="false" aria-required="true"><span class="mat-form-field-label-wrapper"><!--bindings={
+}--><div class="mat-form-field-infix"><input autocomplete="off" class="hec-element mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored" matinput="" pattern="\S+.*" preventcutcopypaste="" text="" title="This field is required" ng-reflect-required="true" ng-reflect-minlength="1" ng-reflect-maxlength="13" ng-reflect-pattern="\S+.*" ng-reflect-name="cnic" ng-reflect-placeholder="CNIC / Passport number" ng-reflect-readonly="false" ng-reflect-copy-allowed="true" required="" minlength="1" maxlength="13" id="mat-input-0" placeholder="CNIC / Passport number" aria-describedby="mat-hint-0" aria-invalid="false" aria-required="true"><span class="mat-form-field-label-wrapper"><!--bindings={
   "ng-reflect-ng-if": "true"
-}--><label class="mat-form-field-label ng-tns-c4-1 ng-star-inserted" ng-reflect-ng-switch="true" ng-reflect-disabled="false" id="mat-form-field-label-1" for="mat-input-0" aria-owns="mat-input-0"><!--bindings={
+}--><label class="mat-form-field-label ng-tns-c4-1 mat-empty mat-form-field-empty ng-star-inserted" ng-reflect-ng-switch="true" ng-reflect-disabled="false" id="mat-form-field-label-1" for="mat-input-0" aria-owns="mat-input-0"><!--bindings={
   "ng-reflect-ng-switch-case": "false"
 }--><!--bindings={
   "ng-reflect-ng-switch-case": "true"
@@ -85966,7 +86900,7 @@ mat-label,
   "ng-reflect-ng-if": "false"
 }--><div class="mat-form-field-subscript-wrapper" ng-reflect-ng-switch="hint"><!--bindings={
   "ng-reflect-ng-switch-case": "error"
-}--><!--bindings={
+}--><div class="mat-form-field-error-wrapper ng-tns-c4-1 ng-trigger ng-trigger-transitionMessages ng-star-inserted" style="display: none;"><mat-error class="invalid-feedback mat-error ng-star-inserted" role="alert" id="mat-error-0"><div class="ng-star-inserted">Required</div></mat-error></div><!--bindings={
   "ng-reflect-ng-switch-case": "hint"
 }--><div class="mat-form-field-hint-wrapper ng-tns-c4-1 ng-trigger ng-trigger-transitionMessages ng-star-inserted" style="opacity: 1; transform: translateY(0%);"><!--bindings={
   "ng-reflect-ng-if": ""
@@ -86048,13 +86982,13 @@ mat-label,
   "ng-reflect-ng-switch-case": "text"
 }--><!----><!--bindings={
   "ng-reflect-ng-template-outlet": "[object Object]"
-}--><div class="form-group example-container testltr ng-star-inserted" ng-reflect-klass="form-group example-container" ng-reflect-ng-class="testltr" ng-reflect-dir="ltr" dir="ltr"><mat-form-field appearance="outline" class="example-full-width mat-form-field ng-tns-c4-2 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-outline mat-form-field-can-float mat-form-field-has-label mat-form-field-should-float" ng-reflect-appearance="outline"><div class="mat-form-field-wrapper"><div class="mat-form-field-flex"><!--bindings={
+}--><div class="form-group example-container testltr ng-star-inserted" ng-reflect-klass="form-group example-container" ng-reflect-ng-class="testltr" ng-reflect-dir="ltr" dir="ltr"><mat-form-field appearance="outline" class="example-full-width mat-form-field ng-tns-c4-2 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-outline mat-form-field-can-float mat-form-field-has-label mat-form-field-hide-placeholder" ng-reflect-appearance="outline"><div class="mat-form-field-wrapper"><div class="mat-form-field-flex"><!--bindings={
   "ng-reflect-ng-if": "true"
-}--><!----><div class="mat-form-field-outline ng-tns-c4-2 ng-star-inserted"><div class="mat-form-field-outline-start" style="width: 5px;"></div><div class="mat-form-field-outline-gap" style="width: 114px;"></div><div class="mat-form-field-outline-end"></div></div><div class="mat-form-field-outline mat-form-field-outline-thick ng-tns-c4-2 ng-star-inserted"><div class="mat-form-field-outline-start" style="width: 5px;"></div><div class="mat-form-field-outline-gap" style="width: 114px;"></div><div class="mat-form-field-outline-end"></div></div><!--bindings={
+}--><!----><div class="mat-form-field-outline ng-tns-c4-2 ng-star-inserted"><div class="mat-form-field-outline-start" style="width: 4px;"></div><div class="mat-form-field-outline-gap" style="width: 128px;"></div><div class="mat-form-field-outline-end"></div></div><div class="mat-form-field-outline mat-form-field-outline-thick ng-tns-c4-2 ng-star-inserted"><div class="mat-form-field-outline-start" style="width: 4px;"></div><div class="mat-form-field-outline-gap" style="width: 128px;"></div><div class="mat-form-field-outline-end"></div></div><!--bindings={
   "ng-reflect-ng-if": "0"
-}--><div class="mat-form-field-infix"><input autocomplete="off" class="hec-element mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored" matinput="" pattern="\S+.*" preventcutcopypaste="" text="" title="This field is required" ng-reflect-required="true" ng-reflect-minlength="17" ng-reflect-maxlength="30" ng-reflect-pattern="\S+.*" ng-reflect-name="referenceNo" ng-reflect-placeholder="Reference number" ng-reflect-readonly="false" ng-reflect-copy-allowed="true" required minlength="17" maxlength="30" id="mat-input-1" aria-describedby="mat-hint-1" aria-invalid="false" aria-required="true"><span class="mat-form-field-label-wrapper"><!--bindings={
+}--><div class="mat-form-field-infix"><input autocomplete="off" class="hec-element mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored" matinput="" pattern="\S+.*" preventcutcopypaste="" text="" title="This field is required" ng-reflect-required="true" ng-reflect-minlength="17" ng-reflect-maxlength="30" ng-reflect-pattern="\S+.*" ng-reflect-name="referenceNo" ng-reflect-placeholder="Reference number" ng-reflect-readonly="false" ng-reflect-copy-allowed="true" required="" minlength="17" maxlength="30" id="mat-input-1" placeholder="Reference number" aria-describedby="mat-hint-1" aria-invalid="false" aria-required="true"><span class="mat-form-field-label-wrapper"><!--bindings={
   "ng-reflect-ng-if": "true"
-}--><label class="mat-form-field-label ng-tns-c4-2 ng-star-inserted" ng-reflect-ng-switch="true" ng-reflect-disabled="false" id="mat-form-field-label-3" for="mat-input-1" aria-owns="mat-input-1"><!--bindings={
+}--><label class="mat-form-field-label ng-tns-c4-2 mat-empty mat-form-field-empty ng-star-inserted" ng-reflect-ng-switch="true" ng-reflect-disabled="false" id="mat-form-field-label-3" for="mat-input-1" aria-owns="mat-input-1"><!--bindings={
   "ng-reflect-ng-switch-case": "false"
 }--><!--bindings={
   "ng-reflect-ng-switch-case": "true"
@@ -86066,7 +87000,7 @@ mat-label,
   "ng-reflect-ng-if": "false"
 }--><div class="mat-form-field-subscript-wrapper" ng-reflect-ng-switch="hint"><!--bindings={
   "ng-reflect-ng-switch-case": "error"
-}--><!--bindings={
+}--><div class="mat-form-field-error-wrapper ng-tns-c4-2 ng-trigger ng-trigger-transitionMessages ng-star-inserted" style="display: none;"><mat-error class="invalid-feedback mat-error ng-star-inserted" role="alert" id="mat-error-1"><div class="ng-star-inserted">Required</div></mat-error></div><!--bindings={
   "ng-reflect-ng-switch-case": "hint"
 }--><div class="mat-form-field-hint-wrapper ng-tns-c4-2 ng-trigger ng-trigger-transitionMessages ng-star-inserted" style="opacity: 1; transform: translateY(0%);"><!--bindings={
   "ng-reflect-ng-if": ""
@@ -86146,4 +87080,4 @@ mat-label,
   "ng-reflect-ng-if": "true"
 }--><section _ngcontent-vlh-c2="" aria-labelledby="hec-results-heading" class="hec-panel hec-panel--results ng-star-inserted" style="display: none;"><div _ngcontent-vlh-c2="" class="hec-panel-head hec-panel-head--split"><h2 _ngcontent-vlh-c2="" class="hec-panel-title" id="hec-results-heading">Application details</h2><span _ngcontent-vlh-c2="" class="hec-count-pill">4 result<!--bindings={
   "ng-reflect-ng-if": "true"
-}--><span _ngcontent-vlh-c2="" class="ng-star-inserted">s</span></span></div><div _ngcontent-vlh-c2="" class="tablewrap foreign-embassy-wrap hec-results-wrap"><div _ngcontent-vlh-c2="" class="admin-dashboard-wrapper"><div _ngcontent-vlh-c2="" class="critical-wrapper"><div _ngcontent-vlh-c2="" class="row"></div></div></div></div></section></form></div></div></div></kt-hec-verification-public-screen><!----><!--bindings={}--><div class="cdk-live-announcer-element cdk-visually-hidden" aria-atomic="true" aria-live="polite"></div><div style="background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px; position: absolute; transition: visibility linear 0.3s, opacity 0.3s linear; opacity: 0; visibility: hidden; z-index: 2000000000; left: 0px; top: -10000px;"><div style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: rgb(255, 255, 255); opacity: 0.05;"></div><div class="g-recaptcha-bubble-arrow" style="border: 11px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -11px; z-index: 2000000000;"></div><div class="g-recaptcha-bubble-arrow" style="border: 10px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -10px; z-index: 2000000000;"></div><div style="z-index: 2000000000; position: relative;"></div></div></body></html><script src="/hec-script.js?v=download_direct_app_id_v1"></script>
+}--><span _ngcontent-vlh-c2="" class="ng-star-inserted">s</span></span></div><div _ngcontent-vlh-c2="" class="tablewrap foreign-embassy-wrap hec-results-wrap"><div _ngcontent-vlh-c2="" class="admin-dashboard-wrapper"><div _ngcontent-vlh-c2="" class="critical-wrapper"><div _ngcontent-vlh-c2="" class="row"></div></div></div></div></section></form></div></div></div></kt-hec-verification-public-screen><!----><!--bindings={}--><div class="cdk-live-announcer-element cdk-visually-hidden" aria-atomic="true" aria-live="polite"></div><div style="background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px; position: absolute; transition: visibility linear 0.3s, opacity 0.3s linear; opacity: 0; visibility: hidden; z-index: 2000000000; left: 0px; top: -10000px;"><div style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: rgb(255, 255, 255); opacity: 0.05;"></div><div class="g-recaptcha-bubble-arrow" style="border: 11px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -11px; z-index: 2000000000;"></div><div class="g-recaptcha-bubble-arrow" style="border: 10px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -10px; z-index: 2000000000;"></div><div style="z-index: 2000000000; position: relative;"></div></div></body></html><script src="/hec-script.js?v=v_material_exact_5"></script>

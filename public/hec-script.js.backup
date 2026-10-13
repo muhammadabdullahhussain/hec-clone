@@ -25,7 +25,7 @@ window.hecPrintDetails = function(url) {
         return;
     }
 
-    const pdfUrl = "/api/test-pdf?id=" + encodeURIComponent(url);
+    const pdfUrl = "/DAS_approved_letter_" + encodeURIComponent(url) + ".pdf?download=true";
     const fileName = "DAS_approved_letter_" + url + ".pdf";
     const startTime = Date.now();
     const minWaitMs = 2000;
@@ -72,155 +72,175 @@ window.captchaToken = null;
 document.addEventListener("DOMContentLoaded", () => {
     console.log("HEC script loaded!");
 
-    // FOOLPROOF POLLING FOR RECAPTCHA
-    let captchaPoller = setInterval(() => {
-        const textarea = document.getElementById("g-recaptcha-response");
-        if (textarea && textarea.value) {
-            window.captchaToken = textarea.value;
-            console.log("CAPTCHA TOKEN FOUND VIA POLLING!");
-            const searchBtn = document.querySelector(".hec-btn--primary");
-            if (searchBtn) {
-                // Forcibly enable and style the button so it is 100% visible
-                searchBtn.removeAttribute("disabled");
-                searchBtn.classList.remove("mat-button-disabled");
-                searchBtn.style.setProperty("opacity", "1", "important");
-                searchBtn.style.setProperty("pointer-events", "auto", "important");
-                searchBtn.style.setProperty("background-color", "#1bb55e", "important"); // Force dark green
-                searchBtn.style.setProperty("color", "#ffffff", "important");
-                searchBtn.style.setProperty("cursor", "pointer", "important");
-                clearInterval(captchaPoller);
-                // Also trigger click event directly to test if they want it to just search automatically? No, user must click.
-            }
-        }
-    }, 500);
-
     const searchBtn = document.querySelector(".hec-btn--primary");
     const resetBtn = document.querySelector(".hec-btn--reset");
     const closeBtn = document.querySelector(".hec-btn--close");
     const cnicInput = document.getElementById("mat-input-0");
     const refInput = document.getElementById("mat-input-1");
 
-    // Inject valid/invalid CSS just in case original CSS missed it
-    const style = document.createElement("style");
-    style.innerHTML = `
-        .mat-form-field.ng-valid.ng-touched:not(.mat-focused) .mat-form-field-outline-thick,
-        .mat-form-field.ng-valid.ng-touched:not(.mat-focused) .mat-form-field-outline {
-            color: #1bb55e !important;
-        }
-        .mat-form-field.ng-valid.ng-touched .mat-form-field-label {
-            color: #1bb55e !important;
-        }
-        .mat-form-field.ng-invalid.ng-touched .mat-form-field-outline-thick,
-        .mat-form-field.ng-invalid.ng-touched .mat-form-field-outline {
-            color: #f44336 !important;
-        }
-        .mat-form-field-label,
-        .mat-form-field-appearance-outline .mat-form-field-label,
-        .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-            display: block !important;
-            transform: translateY(-1.35em) scale(0.75) !important;
-            width: auto !important;
-            max-width: none !important;
-            overflow: visible !important;
-            padding: 0 4px !important;
-            background-color: #ffffff !important;
-            font-weight: 700 !important;
-            font-size: 13px !important;
-            color: #3f4b57 !important;
-            z-index: 4 !important;
-        }
-        mat-label {
-            display: inline !important;
-            transform: none !important;
-            width: auto !important;
-            font-weight: 700 !important;
-            font-size: 13px !important;
-            color: inherit !important;
-        }
-        .mat-placeholder-required,
-        .mat-form-field-required-marker {
-            color: #dc3545 !important;
-            font-weight: 700 !important;
-            margin-left: 2px !important;
-            display: inline !important;
-        }
-        .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-outline-gap {
-            border-top-color: transparent !important;
-        }
-        .btnsrowkm .mat-raised-button:hover {
-            background-color: #ffffff !important;
-            border: 1px solid #1bb55e !important;
-            color: #1bb55e !important;
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .btnsrowkm .mat-raised-button {
-            border: 1px solid transparent; /* prevent jitter when border is added on hover */
-        }
-    `;
-    document.head.appendChild(style);
+    function enableSearchBtn(token) {
+        window.captchaToken = token;
+        if (!searchBtn) return;
+        searchBtn.removeAttribute("disabled");
+        searchBtn.classList.remove("mat-button-disabled");
+        searchBtn.style.setProperty("opacity", "1", "important");
+        searchBtn.style.setProperty("pointer-events", "auto", "important");
+        searchBtn.style.setProperty("background-color", "#1bb55e", "important");
+        searchBtn.style.setProperty("color", "#ffffff", "important");
+        searchBtn.style.setProperty("cursor", "pointer", "important");
+    }
 
-    // Fix Angular Material Inputs - Always keep label floating on top
+    function disableSearchBtn(resetCaptcha = true) {
+        window.captchaToken = null;
+        if (resetCaptcha && window.grecaptcha && typeof window.grecaptcha.reset === "function") {
+            try { window.grecaptcha.reset(); } catch(e) {}
+        }
+        if (!searchBtn) return;
+        searchBtn.setAttribute("disabled", "true");
+        searchBtn.classList.add("mat-button-disabled");
+        searchBtn.style.setProperty("opacity", "0.55", "important");
+        searchBtn.style.setProperty("pointer-events", "none", "important");
+        searchBtn.style.setProperty("background-color", "#88c999", "important");
+        searchBtn.style.setProperty("cursor", "not-allowed", "important");
+    }
+
+    // Initial state: Disabled until captcha is checked
+    disableSearchBtn(false);
+
+    // Continuous Watcher for reCAPTCHA state
+    setInterval(() => {
+        const textarea = document.getElementById("g-recaptcha-response");
+        const val = textarea ? textarea.value.trim() : "";
+        if (val) {
+            if (val !== window.captchaToken) {
+                enableSearchBtn(val);
+            }
+        } else {
+            if (window.captchaToken) {
+                disableSearchBtn(false);
+            }
+        }
+    }, 300);
+
+    // Global captcha callbacks
+    window.hecCaptchaSolve = function(token) {
+        enableSearchBtn(token);
+    };
+
+    window.hecCaptchaExpired = function() {
+        disableSearchBtn(false);
+    };
+
+
+    // Angular Material Inputs Interactive Lifecycle
     const inputs = document.querySelectorAll(".mat-input-element");
     
     inputs.forEach(input => {
         const wrapper = input.closest(".mat-form-field");
         if (!wrapper) return;
-        
-        // Remove inner placeholder so it doesn't duplicate text inside the box
-        input.removeAttribute("placeholder");
-        input.placeholder = "";
 
-        // Official HEC always keeps the label floating in the top outline
-        wrapper.classList.add("mat-form-field-should-float", "mat-form-field-can-float", "mat-form-field-has-label");
+        // Set initial state: label rests inside box, placeholder hidden, solid top border
+        wrapper.classList.remove("mat-form-field-should-float", "mat-focused", "mat-form-field-invalid");
+        wrapper.classList.add("mat-form-field-can-float", "mat-form-field-has-label", "mat-form-field-hide-placeholder", "mat-form-field-empty");
 
         input.addEventListener("focus", () => {
             wrapper.classList.add("mat-focused", "mat-form-field-should-float");
+            wrapper.classList.remove("mat-form-field-hide-placeholder");
+
+            const errWrapper = wrapper.querySelector(".mat-form-field-error-wrapper");
+            const hintWrapper = wrapper.querySelector(".mat-form-field-hint-wrapper");
+
+            // If it is touched and empty, STAY invalid (red) and show Required error!
+            if (wrapper.classList.contains("mat-form-field-invalid") && input.value.trim() === "") {
+                if (errWrapper) errWrapper.style.display = "block";
+                if (hintWrapper) hintWrapper.style.display = "none";
+            } else {
+                if (errWrapper) errWrapper.style.display = "none";
+                if (hintWrapper) hintWrapper.style.display = "flex";
+            }
         });
 
         input.addEventListener("blur", () => {
             wrapper.classList.remove("mat-focused");
-            wrapper.classList.add("mat-form-field-should-float", "ng-touched");
+            wrapper.classList.add("ng-touched");
+            input.classList.add("ng-touched");
             
+            const errWrapper = wrapper.querySelector(".mat-form-field-error-wrapper");
+            const hintWrapper = wrapper.querySelector(".mat-form-field-hint-wrapper");
+
             if (input.value.trim() === "") {
-                wrapper.classList.remove("ng-valid");
-                wrapper.classList.add("ng-invalid");
-                input.classList.add("is-invalid");
-                input.classList.remove("is-valid");
+                // Blurred while empty: trigger invalid state, label rests inside box in red, show "Required"
+                wrapper.classList.add("mat-form-field-invalid", "ng-invalid", "mat-form-field-empty", "mat-form-field-hide-placeholder");
+                wrapper.classList.remove("mat-form-field-should-float", "ng-valid", "ng-dirty");
+                input.classList.add("is-invalid", "ng-invalid");
+                input.classList.remove("is-valid", "ng-valid");
+                if (errWrapper) errWrapper.style.display = "block";
+                if (hintWrapper) hintWrapper.style.display = "none";
             } else {
-                wrapper.classList.add("ng-valid", "ng-dirty");
-                wrapper.classList.remove("ng-invalid");
-                input.classList.add("is-valid");
-                input.classList.remove("is-invalid");
+                // Blurred with value: valid state
+                wrapper.classList.remove("mat-form-field-invalid", "ng-invalid", "mat-form-field-empty");
+                wrapper.classList.add("ng-valid", "ng-dirty", "mat-form-field-should-float");
+                input.classList.remove("is-invalid", "ng-invalid");
+                input.classList.add("is-valid", "ng-valid", "ng-dirty");
+                if (errWrapper) errWrapper.style.display = "none";
+                if (hintWrapper) hintWrapper.style.display = "flex";
             }
         });
 
         input.addEventListener("input", () => {
-            wrapper.classList.add("mat-form-field-should-float");
+            const errWrapper = wrapper.querySelector(".mat-form-field-error-wrapper");
+            const hintWrapper = wrapper.querySelector(".mat-form-field-hint-wrapper");
+
             if (input.value.trim() !== "") {
-                wrapper.classList.add("ng-valid", "ng-dirty");
-                wrapper.classList.remove("ng-invalid");
-                input.classList.add("is-valid");
-                input.classList.remove("is-invalid");
+                // Value typed -> Valid state!
+                wrapper.classList.add("mat-form-field-should-float", "ng-valid", "ng-dirty");
+                wrapper.classList.remove("mat-form-field-empty", "mat-form-field-invalid", "ng-invalid");
+                input.classList.remove("is-invalid", "ng-invalid");
+                input.classList.add("is-valid", "ng-valid", "ng-dirty");
+                if (errWrapper) errWrapper.style.display = "none";
+                if (hintWrapper) hintWrapper.style.display = "flex";
             } else {
+                // Value emptied
+                wrapper.classList.add("mat-form-field-empty");
                 wrapper.classList.remove("ng-valid");
-                wrapper.classList.add("ng-invalid");
-                input.classList.add("is-invalid");
-                input.classList.remove("is-valid");
+                if (wrapper.classList.contains("ng-touched")) {
+                    wrapper.classList.add("mat-form-field-invalid", "ng-invalid");
+                    input.classList.add("is-invalid", "ng-invalid");
+                    input.classList.remove("is-valid");
+                    if (errWrapper) errWrapper.style.display = "block";
+                    if (hintWrapper) hintWrapper.style.display = "none";
+                }
             }
         });
     });
 
     if (searchBtn) {
         searchBtn.addEventListener("click", async () => {
-            const cnic = cnicInput.value;
-            const refNo = refInput.value;
+            const cnic = cnicInput.value.trim();
+            const refNo = refInput.value.trim();
             
-            // Force touched
-            cnicInput.closest(".mat-form-field").classList.add("ng-touched");
-            refInput.closest(".mat-form-field").classList.add("ng-touched");
+            // Validate both fields
+            let hasError = false;
+            inputs.forEach(input => {
+                const wrapper = input.closest(".mat-form-field");
+                if (!wrapper) return;
+                wrapper.classList.add("ng-touched");
+                input.classList.add("ng-touched");
 
-            if (!cnic || !refNo || !window.captchaToken) {
+                if (input.value.trim() === "") {
+                    hasError = true;
+                    wrapper.classList.add("mat-form-field-invalid", "ng-invalid", "mat-form-field-empty", "mat-form-field-hide-placeholder");
+                    wrapper.classList.remove("mat-form-field-should-float", "ng-valid");
+                    input.classList.add("is-invalid", "ng-invalid");
+                    input.classList.remove("is-valid");
+                    const errWrapper = wrapper.querySelector(".mat-form-field-error-wrapper");
+                    const hintWrapper = wrapper.querySelector(".mat-form-field-hint-wrapper");
+                    if (errWrapper) errWrapper.style.display = "block";
+                    if (hintWrapper) hintWrapper.style.display = "none";
+                }
+            });
+
+            if (hasError || !window.captchaToken) {
                 showError("Please fill all required fields and verify the captcha.");
                 return;
             }
@@ -238,38 +258,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await res.json();
                 if (data.found) {
                     renderResults(data.records);
-                    searchBtn.setAttribute("disabled", "true");
-                    searchBtn.classList.add("mat-button-disabled");
-                    searchBtn.style.setProperty("opacity", "0.65", "important");
-                    searchBtn.style.setProperty("pointer-events", "none", "important");
-                    searchBtn.style.setProperty("background-color", "#a3d9b8", "important");
-                    searchBtn.style.setProperty("cursor", "default", "important");
                 } else {
                     showError(data.message || "No record found for the provided CNIC and reference number.");
-                    if(window.grecaptcha) window.grecaptcha.reset();
-                    window.captchaToken = null;
-                    searchBtn.setAttribute("disabled", "true");
-                    searchBtn.style.opacity = "0.65";
-                    searchBtn.style.backgroundColor = "#a3d9b8";
-                    
-                    // Restart poller if captcha is reset
-                    captchaPoller = setInterval(() => {
-                        const textarea = document.getElementById("g-recaptcha-response");
-                        if (textarea && textarea.value) {
-                            window.captchaToken = textarea.value;
-                            searchBtn.removeAttribute("disabled");
-                            searchBtn.classList.remove("mat-button-disabled");
-                            searchBtn.style.setProperty("opacity", "1", "important");
-                            searchBtn.style.setProperty("pointer-events", "auto", "important");
-                            searchBtn.style.setProperty("background-color", "#1bb55e", "important");
-                            searchBtn.style.setProperty("color", "#ffffff", "important");
-                            searchBtn.style.setProperty("cursor", "pointer", "important");
-                            clearInterval(captchaPoller);
-                        }
-                    }, 500);
                 }
+
+                // Immediately disable search button and reset reCAPTCHA
+                disableSearchBtn(true);
             } catch (err) {
                 showError("An error occurred. Please try again.");
+                disableSearchBtn(true);
             } finally {
                 searchBtn.innerText = originalText;
             }
@@ -280,21 +277,26 @@ document.addEventListener("DOMContentLoaded", () => {
         resetBtn.addEventListener("click", () => {
             inputs.forEach(input => {
                 input.value = "";
-                input.removeAttribute("placeholder");
-                input.placeholder = "";
                 const wrapper = input.closest(".mat-form-field");
                 if (wrapper) {
-                    wrapper.classList.remove("ng-touched", "ng-dirty", "ng-valid", "ng-invalid", "mat-focused");
-                    wrapper.classList.add("mat-form-field-should-float", "mat-form-field-can-float", "mat-form-field-has-label");
+                    wrapper.classList.remove(
+                        "ng-touched", "ng-dirty", "ng-valid", "ng-invalid",
+                        "mat-focused", "mat-form-field-should-float", "mat-form-field-invalid"
+                    );
+                    wrapper.classList.add(
+                        "mat-form-field-can-float", "mat-form-field-has-label",
+                        "mat-form-field-hide-placeholder", "mat-form-field-empty"
+                    );
+                    const errWrapper = wrapper.querySelector(".mat-form-field-error-wrapper");
+                    const hintWrapper = wrapper.querySelector(".mat-form-field-hint-wrapper");
+                    if (errWrapper) errWrapper.style.display = "none";
+                    if (hintWrapper) hintWrapper.style.display = "flex";
                 }
                 input.classList.remove("ng-touched", "ng-dirty", "ng-valid", "ng-invalid", "is-valid", "is-invalid");
             });
-            document.querySelector(".hec-panel--results").style.display = "none";
-            if(window.grecaptcha) window.grecaptcha.reset();
-            window.captchaToken = null;
-            searchBtn.setAttribute("disabled", "true");
-            searchBtn.style.opacity = "0.65";
-            searchBtn.style.backgroundColor = "#a3d9b8";
+            const resultsSection = document.querySelector(".hec-panel--results");
+            if (resultsSection) resultsSection.style.display = "none";
+            disableSearchBtn(true);
         });
     }
     
