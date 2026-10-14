@@ -24,6 +24,20 @@ export function verifyToken(token: string): any {
     }
 }
 
+export function sign2FATempToken(payload: { id: number; username: string }) {
+    return jwt.sign({ ...payload, is2FAPending: true }, SECRET, { expiresIn: '5m' });
+}
+
+export function verify2FATempToken(token: string): { id: number; username: string; is2FAPending?: boolean } | null {
+    try {
+        const decoded = jwt.verify(token, SECRET) as any;
+        if (!decoded || !decoded.is2FAPending) return null;
+        return decoded;
+    } catch {
+        return null;
+    }
+}
+
 /**
  * Validates admin authentication from NextRequest cookies or Authorization header.
  * Returns decoded payload if valid, or null if unauthorized.

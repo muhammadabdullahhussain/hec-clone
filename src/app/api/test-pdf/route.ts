@@ -5,12 +5,21 @@ import QRCode from 'qrcode';
 import fs from 'fs';
 import path from 'path';
 import { prisma } from '@/lib/prisma';
-
+import { checkRateLimit, getClientIp } from '@/lib/security';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
     try {
+        const clientIp = getClientIp(req);
+        // Rate limit: Max 30 PDF generation requests per minute per IP
+        const rateCheck = checkRateLimit(`pdf_${clientIp}`, 30, 60);
+        if (!rateCheck.allowed) {
+            return new NextResponse('Too many PDF requests. Please wait a moment.', {
+                status: 429,
+                headers: { 'Retry-After': String(rateCheck.resetInSec) }
+            });
+        }
         let id = req.nextUrl.searchParams.get('id');
         if (!id) {
             const pathname = req.nextUrl.pathname || req.url || '';

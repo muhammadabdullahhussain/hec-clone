@@ -7,6 +7,12 @@ export default function AdminLogin() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    // 2FA States
+    const [requires2FA, setRequires2FA] = useState(false);
+    const [tempToken, setTempToken] = useState("");
+    const [twoFactorCode, setTwoFactorCode] = useState("");
+    const [useBackupCode, setUseBackupCode] = useState(false);
+
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -21,9 +27,44 @@ export default function AdminLogin() {
             const data = await res.json();
 
             if (res.ok) {
-                window.location.href = "/hec-admin";
+                if (data.requires2FA) {
+                    setRequires2FA(true);
+                    setTempToken(data.tempToken);
+                    setError("");
+                } else {
+                    window.location.href = "/hec-admin";
+                }
             } else {
                 setError(data.error || "Invalid username or password.");
+            }
+        } catch (err) {
+            setError("Network error. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handle2FAVerify = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+
+        try {
+            const res = await fetch("/api/auth/2fa/verify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    tempToken,
+                    code: twoFactorCode.trim(),
+                    isBackupCode: useBackupCode
+                })
+            });
+            const data = await res.json();
+
+            if (res.ok && data.success) {
+                window.location.href = "/hec-admin";
+            } else {
+                setError(data.error || "Verification failed. Please try again.");
             }
         } catch (err) {
             setError("Network error. Please try again.");
@@ -62,12 +103,12 @@ export default function AdminLogin() {
                             HEC Admin Portal
                         </h1>
                         <p className="text-center text-xs text-gray-500 mt-1 font-medium">
-                            Degree Attestation Management Console
+                            {requires2FA ? "Two-Factor Verification Required" : "Degree Attestation Management Console"}
                         </p>
                     </div>
 
                     {error && (
-                        <div className="bg-red-50/90 border border-red-200 text-red-700 p-3.5 rounded-xl mb-6 text-sm flex items-center gap-2.5 shadow-sm animate-shake">
+                        <div className="bg-red-50/90 border border-red-200 text-red-700 p-3.5 rounded-xl mb-6 text-sm flex items-center gap-2.5 shadow-sm">
                             <svg className="w-5 h-5 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                             </svg>
@@ -75,71 +116,146 @@ export default function AdminLogin() {
                         </div>
                     )}
 
-                    <form onSubmit={handleLogin} className="space-y-4">
-                        <div>
-                            <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
-                                Administrator Username
-                            </label>
-                            <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    {!requires2FA ? (
+                        /* STEP 1: Username & Password */
+                        <form onSubmit={handleLogin} className="space-y-4">
+                            <div>
+                                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+                                    Administrator Username
+                                </label>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        required
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        placeholder="Enter administrative username"
+                                        className="pl-11 w-full border border-gray-200 rounded-xl p-3 text-sm text-gray-900 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-[#009049] focus:border-[#009049] outline-none transition-all shadow-sm"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+                                    Security Password
+                                </label>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="password"
+                                        required
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder="••••••••••••"
+                                        className="pl-11 w-full border border-gray-200 rounded-xl p-3 text-sm text-gray-900 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-[#009049] focus:border-[#009049] outline-none transition-all shadow-sm"
+                                    />
+                                </div>
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className={`w-full mt-2 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-700/20 transform transition-all duration-200 flex justify-center items-center ${
+                                    loading
+                                        ? 'bg-gray-400 cursor-not-allowed'
+                                        : 'bg-gradient-to-r from-[#009049] to-[#007b3e] hover:from-[#007b3e] hover:to-[#006533] hover:shadow-xl active:scale-[0.98]'
+                                }`}
+                            >
+                                {loading ? (
+                                    <>
+                                        <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Authenticating...
+                                    </>
+                                ) : (
+                                    'Sign In to Console'
+                                )}
+                            </button>
+                        </form>
+                    ) : (
+                        /* STEP 2: Google Authenticator / Backup Code */
+                        <form onSubmit={handle2FAVerify} className="space-y-4">
+                            <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-2xl p-4 text-center">
+                                <div className="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                     </svg>
                                 </div>
+                                <h3 className="font-bold text-sm text-gray-800">
+                                    {useBackupCode ? "Emergency Backup Code" : "Google Authenticator Code"}
+                                </h3>
+                                <p className="text-xs text-gray-600 mt-1">
+                                    {useBackupCode
+                                        ? "Enter one of your 8-character single-use emergency backup codes (e.g. A1B2-C3D4)."
+                                        : "Open Google or Microsoft Authenticator app on your phone and enter the 6-digit code."}
+                                </p>
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+                                    {useBackupCode ? "8-Character Backup Code" : "6-Digit Security PIN"}
+                                </label>
                                 <input
                                     type="text"
                                     required
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    placeholder="Enter administrative username"
-                                    className="pl-11 w-full border border-gray-200 rounded-xl p-3 text-sm text-gray-900 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-[#009049] focus:border-[#009049] outline-none transition-all shadow-sm"
+                                    autoFocus
+                                    maxLength={useBackupCode ? 10 : 6}
+                                    value={twoFactorCode}
+                                    onChange={(e) => setTwoFactorCode(e.target.value.toUpperCase())}
+                                    placeholder={useBackupCode ? "XXXX-XXXX" : "000000"}
+                                    className="w-full text-center tracking-widest text-2xl font-mono font-bold border border-gray-200 rounded-xl p-3 text-gray-900 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-[#009049] focus:border-[#009049] outline-none transition-all shadow-sm"
                                 />
                             </div>
-                        </div>
 
-                        <div>
-                            <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
-                                Security Password
-                            </label>
-                            <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                    </svg>
-                                </div>
-                                <input
-                                    type="password"
-                                    required
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="••••••••••••"
-                                    className="pl-11 w-full border border-gray-200 rounded-xl p-3 text-sm text-gray-900 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-[#009049] focus:border-[#009049] outline-none transition-all shadow-sm"
-                                />
+                            <button
+                                type="submit"
+                                disabled={loading || !twoFactorCode.trim()}
+                                className={`w-full text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-700/20 transform transition-all duration-200 flex justify-center items-center ${
+                                    loading || !twoFactorCode.trim()
+                                        ? 'bg-gray-400 cursor-not-allowed'
+                                        : 'bg-gradient-to-r from-[#009049] to-[#007b3e] hover:from-[#007b3e] hover:to-[#006533] hover:shadow-xl active:scale-[0.98]'
+                                }`}
+                            >
+                                {loading ? 'Verifying Code...' : 'Confirm & Access Console'}
+                            </button>
+
+                            <div className="flex items-center justify-between pt-2">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setUseBackupCode(!useBackupCode);
+                                        setTwoFactorCode("");
+                                        setError("");
+                                    }}
+                                    className="text-xs font-semibold text-emerald-700 hover:text-emerald-900 transition-colors"
+                                >
+                                    {useBackupCode ? "← Use 6-Digit PIN instead" : "Use Emergency Backup Code →"}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setRequires2FA(false);
+                                        setTwoFactorCode("");
+                                        setError("");
+                                    }}
+                                    className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                                >
+                                    Cancel
+                                </button>
                             </div>
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className={`w-full mt-2 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-700/20 transform transition-all duration-200 flex justify-center items-center ${
-                                loading
-                                    ? 'bg-gray-400 cursor-not-allowed'
-                                    : 'bg-gradient-to-r from-[#009049] to-[#007b3e] hover:from-[#007b3e] hover:to-[#006533] hover:shadow-xl active:scale-[0.98]'
-                            }`}
-                        >
-                            {loading ? (
-                                <>
-                                    <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                    </svg>
-                                    Authenticating...
-                                </>
-                            ) : (
-                                'Sign In to Console'
-                            )}
-                        </button>
-                    </form>
+                        </form>
+                    )}
 
                     <div className="mt-8 pt-6 border-t border-gray-100 text-center">
                         <a href="/" className="text-xs font-semibold text-gray-500 hover:text-emerald-700 transition-colors inline-flex items-center gap-1.5">

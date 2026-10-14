@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { verifyPassword, signToken, hashPassword } from '@/lib/auth';
+import { verifyPassword, signToken, hashPassword, sign2FATempToken } from '@/lib/auth';
 import { checkRateLimit, getClientIp, sanitizeString } from '@/lib/security';
 
 export async function POST(request: Request) {
@@ -48,10 +48,20 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
         }
 
-        // 4. Generate JWT Token
+        // 4. Check if Two-Factor Authentication is enabled
+        if (admin.twoFactorEnabled && admin.twoFactorSecret) {
+            const tempToken = sign2FATempToken({ id: admin.id, username: admin.username });
+            return NextResponse.json({
+                requires2FA: true,
+                tempToken,
+                message: 'Two-Factor Authentication required'
+            });
+        }
+
+        // 5. Generate Standard JWT Token
         const token = signToken({ id: admin.id, username: admin.username });
 
-        // 5. Set Secure HTTP-Only Cookie
+        // 6. Set Secure HTTP-Only Cookie
         const response = NextResponse.json({ success: true, message: 'Logged in successfully' });
         response.cookies.set('admin_token', token, { 
             httpOnly: true, 
