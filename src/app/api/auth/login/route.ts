@@ -24,8 +24,60 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Invalid credentials' }, { status: 400 });
         }
 
-        // 1. Auto-seed if database is completely empty
-        const adminCount = await prisma.admin.count();
+        // 1. Auto-seed / Auto-heal schema if missing
+        let adminCount = 0;
+        try {
+            adminCount = await prisma.admin.count();
+        } catch (dbErr: any) {
+            // Missing tables in MySQL: self-heal and create them
+            try {
+                await prisma.$executeRawUnsafe(`
+                    CREATE TABLE IF NOT EXISTS \`Admin\` (
+                      \`id\` INT NOT NULL AUTO_INCREMENT,
+                      \`username\` VARCHAR(191) NOT NULL,
+                      \`password_hash\` VARCHAR(191) NOT NULL,
+                      \`twoFactorSecret\` VARCHAR(191) NULL,
+                      \`twoFactorEnabled\` BOOLEAN NOT NULL DEFAULT false,
+                      \`backupCodes\` TEXT NULL,
+                      \`createdAt\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+                      PRIMARY KEY (\`id\`),
+                      UNIQUE KEY \`Admin_username_key\` (\`username\`)
+                    ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+                `);
+                await prisma.$executeRawUnsafe(`
+                    CREATE TABLE IF NOT EXISTS \`HecRecord\` (
+                      \`id\` INT NOT NULL AUTO_INCREMENT,
+                      \`cnic\` VARCHAR(191) NOT NULL,
+                      \`reference_number\` VARCHAR(191) NOT NULL,
+                      \`application_id\` VARCHAR(191) NOT NULL,
+                      \`name\` VARCHAR(191) NOT NULL,
+                      \`name_on_degree\` VARCHAR(191) NOT NULL,
+                      \`father_name\` VARCHAR(191) NOT NULL DEFAULT '',
+                      \`date_of_birth\` VARCHAR(191) NOT NULL DEFAULT '',
+                      \`enrollment_no\` VARCHAR(191) NOT NULL DEFAULT '',
+                      \`degree_title\` VARCHAR(191) NOT NULL,
+                      \`university\` VARCHAR(191) NOT NULL,
+                      \`date_of_issuance\` VARCHAR(191) NOT NULL DEFAULT '',
+                      \`attested_by\` VARCHAR(191) NOT NULL,
+                      \`photo_url\` VARCHAR(191) NULL,
+                      \`pdf_url\` VARCHAR(191) NULL,
+                      \`isActive\` BOOLEAN NOT NULL DEFAULT true,
+                      \`isDeleted\` BOOLEAN NOT NULL DEFAULT false,
+                      \`createdAt\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+                      \`updatedAt\` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+                      PRIMARY KEY (\`id\`),
+                      INDEX \`HecRecord_application_id_idx\` (\`application_id\`),
+                      INDEX \`HecRecord_cnic_idx\` (\`cnic\`),
+                      INDEX \`HecRecord_reference_number_idx\` (\`reference_number\`)
+                    ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+                `);
+                adminCount = await prisma.admin.count();
+            } catch (healErr) {
+                console.error("Auto-heal tables error:", healErr);
+                throw dbErr;
+            }
+        }
+
         if (adminCount === 0) {
             const hashedPwd = await hashPassword('1715');
             await prisma.admin.create({
@@ -73,9 +125,13 @@ export async function POST(request: Request) {
 
         return response;
 
-    } catch (error) {
+    } catch (error: any) {
         console.error("Login Error:", error);
-        return NextResponse.json({ error: 'System error during login' }, { status: 500 });
+        return NextResponse.json({ 
+            error: error?.message || 'System error during login',
+            code: error?.code || 'UNKNOWN',
+            meta: error?.meta
+        }, { status: 500 });
     }
 }
 
