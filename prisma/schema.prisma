@@ -4,8 +4,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model Admin {
@@ -35,4 +35,8 @@ model HecRecord {
   isDeleted        Boolean  @default(false)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+
+  @@index([application_id])
+  @@index([cnic])
+  @@index([reference_number])
 }
