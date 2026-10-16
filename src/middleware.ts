@@ -88,6 +88,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/hec-admin/:path*', '/:path*.pdf', '/site/verification', '/'],
+    matcher: ['/hec-admin/:path*', '/:path*.pdf', '/site/verification', '/', '/api/:path*'],
 };
 

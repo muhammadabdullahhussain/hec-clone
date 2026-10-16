@@ -17,10 +17,19 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const body = await req.json();
-        const rawCnic = sanitizeString(body.cnic, 30);
-        const rawRef = sanitizeString(body.reference_number, 100);
-        const captchaToken = typeof body.captchaToken === 'string' ? body.captchaToken : '';
+        let body: any;
+        try {
+            body = await req.json();
+        } catch {
+            return NextResponse.json(
+                { found: false, message: 'Invalid or missing request data.' },
+                { status: 400 }
+            );
+        }
+
+        const rawCnic = sanitizeString(body?.cnic, 30);
+        const rawRef = sanitizeString(body?.reference_number, 100);
+        const captchaToken = typeof body?.captchaToken === 'string' ? body.captchaToken : '';
 
         // Basic validation
         if (!rawCnic || !rawRef) {
