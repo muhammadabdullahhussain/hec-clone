@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { requireAdminAuth } from '@/lib/auth';
-import { validateUploadedFile, sanitizeString } from '@/lib/security';
+import { validateUploadedFile, sanitizeString, processAndSaveOptimizedImage } from '@/lib/security';
 
 export const dynamic = 'force-dynamic';
 
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
             const photoName = `photo_${Date.now()}_${randomSuffix}.${validation.safeExt}`;
             const photoPath = path.join(uploadsDir, photoName);
             const photoBuffer = Buffer.from(await photo.arrayBuffer());
-            fs.writeFileSync(photoPath, photoBuffer);
+            await processAndSaveOptimizedImage(photoBuffer, photoPath);
             photoUrl = `/uploads/${photoName}`;
         }
 

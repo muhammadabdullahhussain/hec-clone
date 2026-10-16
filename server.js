@@ -8,6 +8,14 @@ const port = parseInt(process.env.PORT || '3000', 10);
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
+// Global crash-prevention: Ensure unexpected runtime errors don't terminate the process
+process.on('uncaughtException', (err) => {
+  console.error('[CRASH_GUARD] Uncaught Exception caught safely:', err?.message || err);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('[CRASH_GUARD] Unhandled Rejection caught safely:', reason);
+});
+
 app.prepare().then(() => {
   createServer(async (req, res) => {
     try {

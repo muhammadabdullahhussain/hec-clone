@@ -30,6 +30,8 @@ const nextConfig = {
     },
 
     poweredByHeader: false,
+    compress: true,
+    productionBrowserSourceMaps: false,
 
     async headers() {
         return [
@@ -59,6 +61,32 @@ const nextConfig = {
                     {
                         key: 'Permissions-Policy',
                         value: 'camera=(), microphone=(), geolocation=()',
+                    },
+                    {
+                        key: 'X-Permitted-Cross-Domain-Policies',
+                        value: 'none',
+                    },
+                    {
+                        key: 'X-Download-Options',
+                        value: 'noopen',
+                    },
+                ],
+            },
+            {
+                source: '/fonts/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    },
+                ],
+            },
+            {
+                source: '/assets/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
                     },
                 ],
             },

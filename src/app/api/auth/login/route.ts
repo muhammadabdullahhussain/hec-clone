@@ -115,22 +115,23 @@ export async function POST(request: Request) {
 
         // 6. Set Secure HTTP-Only Cookie
         const response = NextResponse.json({ success: true, message: 'Logged in successfully' });
-        response.cookies.set('admin_token', token, { 
+        const cookieOptions = { 
             httpOnly: true, 
             secure: process.env.NODE_ENV === 'production', 
-            sameSite: 'strict',
+            sameSite: 'strict' as const,
             path: '/',
             maxAge: 8 * 60 * 60 // 8 hours
-        });
+        };
+        response.cookies.set('hec_admin_token', token, cookieOptions);
+        response.cookies.set('admin_token', token, cookieOptions);
 
         return response;
 
     } catch (error: any) {
         console.error("Login Error:", error);
+        const isProd = process.env.NODE_ENV === 'production';
         return NextResponse.json({ 
-            error: error?.message || 'System error during login',
-            code: error?.code || 'UNKNOWN',
-            meta: error?.meta
+            error: isProd ? 'Internal authentication error. Please try again.' : (error?.message || 'System error during login')
         }, { status: 500 });
     }
 }

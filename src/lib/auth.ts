@@ -2,7 +2,8 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { NextRequest, NextResponse } from 'next/server';
 
-const SECRET = process.env.JWT_SECRET || 'ibcc_secure_key_1715_hec_portal_prod_2026';
+export const AUTH_COOKIE_NAME = 'hec_admin_token';
+const SECRET = process.env.JWT_SECRET || 'hec_secure_key_9843_portal_prod_2026';
 
 export async function hashPassword(password: string) {
     return await bcrypt.hash(password, 12);
@@ -47,13 +48,16 @@ export function getAuthenticatedAdmin(req: NextRequest | Request): any {
         let token: string | undefined;
 
         if ('cookies' in req && typeof req.cookies?.get === 'function') {
-            token = req.cookies.get('admin_token')?.value;
+            token = req.cookies.get(AUTH_COOKIE_NAME)?.value || req.cookies.get('admin_token')?.value;
         }
 
         if (!token) {
             const authHeader = req.headers.get('authorization') || req.headers.get('cookie') || '';
             if (authHeader.startsWith('Bearer ')) {
                 token = authHeader.substring(7);
+            } else if (authHeader.includes(`${AUTH_COOKIE_NAME}=`)) {
+                const match = authHeader.match(new RegExp(`${AUTH_COOKIE_NAME}=([^;]+)`));
+                if (match) token = match[1];
             } else if (authHeader.includes('admin_token=')) {
                 const match = authHeader.match(/admin_token=([^;]+)/);
                 if (match) token = match[1];

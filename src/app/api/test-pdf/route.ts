@@ -452,6 +452,9 @@ export async function GET(req: NextRequest) {
         const fileName = `DAS_approved_letter_${application_id || 'record'}.pdf`;
         templateDoc.setTitle(`DAS_approved_letter_${application_id || 'record'}`);
         templateDoc.setSubject(`HEC Attestation Certificate - ${application_id || 'record'}`);
+        templateDoc.setAuthor('Higher Education Commission');
+        templateDoc.setProducer('HEC Document Attestation Engine');
+        templateDoc.setCreator('HEC Online Portal');
 
         const pdfBytes = await templateDoc.save();
 
@@ -469,7 +472,7 @@ export async function GET(req: NextRequest) {
         });
 
     } catch (error: any) {
-        console.error('Test PDF Error:', error);
-        return NextResponse.json({ success: false, message: 'Error generating test PDF', details: error?.message }, { status: 500 });
+        console.error('PDF Generation Error:', error);
+        return new NextResponse('Unable to load document at this time. Please try again.', { status: 500 });
     }
 }

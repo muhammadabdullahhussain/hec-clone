@@ -4,7 +4,7 @@ import crypto from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { requireAdminAuth } from '@/lib/auth';
-import { validateUploadedFile, sanitizeString } from '@/lib/security';
+import { validateUploadedFile, sanitizeString, processAndSaveOptimizedImage } from '@/lib/security';
 
 export const dynamic = 'force-dynamic';
 
@@ -142,7 +142,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
                         const randomSuffix = crypto.randomBytes(8).toString('hex');
                         const photoName = `photo_${Date.now()}_${i}_${randomSuffix}.${validation.safeExt}`;
                         const photoBuffer = Buffer.from(await photoFile.arrayBuffer());
-                        fsModule.writeFileSync(path.join(uploadsDir, photoName), photoBuffer);
+                        await processAndSaveOptimizedImage(photoBuffer, path.join(uploadsDir, photoName));
                         photoUrl = `/uploads/${photoName}`;
                     }
                 }
@@ -241,7 +241,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
                 const randomSuffix = crypto.randomBytes(8).toString('hex');
                 const photoName = `photo_${Date.now()}_${randomSuffix}.${validation.safeExt}`;
                 const photoBuffer = Buffer.from(await (photo as File).arrayBuffer());
-                fsModule.writeFileSync(path.join(uploadsDir, photoName), photoBuffer);
+                await processAndSaveOptimizedImage(photoBuffer, path.join(uploadsDir, photoName));
                 updateData.photo_url = `/uploads/${photoName}`;
             }
         }

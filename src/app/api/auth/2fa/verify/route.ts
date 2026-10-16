@@ -67,13 +67,15 @@ export async function POST(req: NextRequest) {
         // Login verified! Issue full admin token
         const token = signToken({ id: admin.id, username: admin.username });
         const response = NextResponse.json({ success: true, message: '2FA verified successfully' });
-        response.cookies.set('admin_token', token, {
+        const cookieOpts = {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            sameSite: 'strict' as const,
             path: '/',
             maxAge: 8 * 60 * 60 // 8 hours
-        });
+        };
+        response.cookies.set('hec_admin_token', token, cookieOpts);
+        response.cookies.set('admin_token', token, cookieOpts);
 
         return response;
     } catch (error) {

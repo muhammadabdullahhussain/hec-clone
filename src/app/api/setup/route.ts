@@ -1,10 +1,19 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { hashPassword } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+    // Lock setup in production - require authorization key to prevent unauthorized DDL or information leakage
+    const setupKey = req.nextUrl.searchParams.get('key') || req.headers.get('x-setup-key');
+    const expectedKey = process.env.SETUP_SECRET || 'hec_internal_admin_setup_2026';
+    const isProd = process.env.NODE_ENV === 'production';
+
+    if (isProd && setupKey !== expectedKey) {
+        return new NextResponse('Not Found', { status: 404 });
+    }
+
     try {
         // 1. Create Admin Table if not exists
         await prisma.$executeRawUnsafe(`

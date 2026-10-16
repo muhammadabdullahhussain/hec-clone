@@ -2,15 +2,29 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 
-const JWT_SECRET_STRING = process.env.JWT_SECRET || 'ibcc_secure_key_1715_hec_portal_prod_2026';
+const JWT_SECRET_STRING = process.env.JWT_SECRET || 'hec_secure_key_9843_portal_prod_2026';
 const secretKey = new TextEncoder().encode(JWT_SECRET_STRING);
+
+// Known automated scrapers / bot user agents to block on sensitive paths
+const BLOCKED_BOT_AGENTS = [
+    'python-requests', 'aiohttp', 'curl/', 'wget/', 'go-http-client', 'postmanruntime', 'scrapy', 'httpclient'
+];
 
 export async function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
+    const userAgent = (request.headers.get('user-agent') || '').toLowerCase();
+
+    // Block automated scraping tools from hitting API routes
+    if (path.startsWith('/api/') && !path.startsWith('/api/pdf/')) {
+        const isBadBot = BLOCKED_BOT_AGENTS.some(bot => userAgent.includes(bot));
+        if (isBadBot) {
+            return new NextResponse('Access Denied', { status: 403 });
+        }
+    }
     
     // Protect hec-admin routes
     if (path.startsWith('/hec-admin') && !path.startsWith('/hec-admin/login')) {
-        const token = request.cookies.get('admin_token')?.value;
+        const token = request.cookies.get('hec_admin_token')?.value || request.cookies.get('admin_token')?.value;
         
         let isValid = false;
         if (token) {
@@ -27,7 +41,8 @@ export async function middleware(request: NextRequest) {
             const redirectRes = NextResponse.redirect(new URL('/hec-admin/login', request.url));
             redirectRes.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
             redirectRes.headers.set('CDN-Cache-Control', 'no-store');
-            // Clear invalid cookie
+            // Clear invalid cookies
+            redirectRes.cookies.delete('hec_admin_token');
             redirectRes.cookies.delete('admin_token');
             return redirectRes;
         }

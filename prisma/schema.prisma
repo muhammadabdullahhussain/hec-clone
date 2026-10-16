@@ -42,4 +42,5 @@ model HecRecord {
   @@index([application_id])
   @@index([cnic])
   @@index([reference_number])
+  @@index([application_id, degree_title])
 }

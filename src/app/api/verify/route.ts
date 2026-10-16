@@ -40,10 +40,11 @@ export async function POST(req: NextRequest) {
 
         const isProduction = process.env.NODE_ENV === 'production';
         if (captchaToken !== 'dev_bypass' || isProduction) {
+            const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY || '6LcmkugtAAAAAEfxEUKjc2_2nbE88evnF6sn1pOI';
             const verifyRes = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `secret=6LcmkugtAAAAAEfxEUKjc2_2nbE88evnF6sn1pOI&response=${encodeURIComponent(captchaToken)}`
+                body: `secret=${encodeURIComponent(recaptchaSecret)}&response=${encodeURIComponent(captchaToken)}`
             });
             const captchaData = await verifyRes.json();
             if (!captchaData.success) {

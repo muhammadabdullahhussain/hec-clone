@@ -7,7 +7,7 @@ import { verifyToken, verifyPassword, hashPassword } from '@/lib/auth';
 
 export async function PUT(request: Request) {
     try {
-        const token = cookies().get('admin_token')?.value;
+        const token = cookies().get('hec_admin_token')?.value || cookies().get('admin_token')?.value;
         if (!token) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
         const decoded: any = verifyToken(token);

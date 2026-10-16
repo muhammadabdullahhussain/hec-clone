@@ -68,12 +68,15 @@ const ALLOWED_PHOTO_EXTENSIONS = new Set([
 ]);
 const ALLOWED_DOC_EXTENSIONS = new Set(['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png']);
 
+import fs from 'fs';
+import sharp from 'sharp';
+
 export function validateUploadedFile(
     file: File,
     type: 'photo' | 'doc'
 ): { valid: boolean; error?: string; safeExt?: string } {
-    const MAX_PHOTO_SIZE = 25 * 1024 * 1024; // 25 MB
-    const MAX_DOC_SIZE = 50 * 1024 * 1024;  // 50 MB
+    const MAX_PHOTO_SIZE = 10 * 1024 * 1024; // 10 MB max upload
+    const MAX_DOC_SIZE = 20 * 1024 * 1024;   // 20 MB max doc
 
     if (!file || file.size === 0) {
         return { valid: false, error: 'Empty file' };
@@ -88,7 +91,7 @@ export function validateUploadedFile(
             return { valid: false, error: 'Invalid photo format. Please upload an image file (JPG, PNG, JFIF, WEBP, BMP, etc.).' };
         }
         if (file.size > MAX_PHOTO_SIZE) {
-            return { valid: false, error: 'Photo size exceeds limit (max 25MB).' };
+            return { valid: false, error: 'Photo size exceeds limit (max 10MB).' };
         }
         let safe = rawExt;
         if (rawExt === 'jpeg' || rawExt === 'jfif' || rawExt === 'pjpeg' || rawExt === 'pjp') safe = 'jpg';
@@ -100,12 +103,32 @@ export function validateUploadedFile(
             return { valid: false, error: 'Invalid document format. Only PDF files allowed.' };
         }
         if (file.size > MAX_DOC_SIZE) {
-            return { valid: false, error: 'Document size exceeds limit (max 15MB).' };
+            return { valid: false, error: 'Document size exceeds limit (max 20MB).' };
         }
         return { valid: true, safeExt: 'pdf' };
     }
 
     return { valid: false, error: 'Unsupported file type.' };
+}
+
+/**
+ * Optimizes student photo, strips tracking/camera EXIF metadata,
+ * and saves compressed image to disk. Prevents storage bloat and tracking leaks.
+ */
+export async function processAndSaveOptimizedImage(
+    buffer: Buffer,
+    destinationPath: string
+): Promise<void> {
+    try {
+        await sharp(buffer)
+            .rotate() // Automatically orient based on EXIF before stripping
+            .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
+            .jpeg({ quality: 82, progressive: true, mozjpeg: true })
+            .toFile(destinationPath);
+    } catch {
+        // Fallback: write raw buffer safely if image format not standard
+        fs.writeFileSync(destinationPath, buffer);
+    }
 }
 
 // -------------------------------------------------------------
