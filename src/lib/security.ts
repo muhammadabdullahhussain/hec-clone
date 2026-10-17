@@ -113,20 +113,29 @@ export function validateUploadedFile(
 
 /**
  * Optimizes student photo, strips tracking/camera EXIF metadata,
- * and saves compressed image to disk. Prevents storage bloat and tracking leaks.
+ * and saves compressed image to disk. Matches target extension.
  */
 export async function processAndSaveOptimizedImage(
     buffer: Buffer,
     destinationPath: string
 ): Promise<void> {
     try {
-        await sharp(buffer)
-            .rotate() // Automatically orient based on EXIF before stripping
-            .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
-            .jpeg({ quality: 82, progressive: true, mozjpeg: true })
-            .toFile(destinationPath);
+        const ext = (destinationPath.split('.').pop() || '').toLowerCase();
+        if (ext === 'png') {
+            await sharp(buffer)
+                .rotate()
+                .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
+                .png({ compressionLevel: 8 })
+                .toFile(destinationPath);
+        } else {
+            await sharp(buffer)
+                .rotate()
+                .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
+                .jpeg({ quality: 85, progressive: true })
+                .toFile(destinationPath);
+        }
     } catch {
-        // Fallback: write raw buffer safely if image format not standard
+        // Fallback: write raw buffer safely if sharp unavailable or encounters unsupported format
         fs.writeFileSync(destinationPath, buffer);
     }
 }

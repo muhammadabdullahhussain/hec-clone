@@ -66,6 +66,46 @@ export async function GET(req: NextRequest) {
             university = record.university || '';
             date_of_issuance = record.date_of_issuance || '';
             photo_url = record.photo_url || null;
+
+            // Intelligent Fallback: If this degree is missing photo or PDF on disk, check linked sibling degrees of the same candidate
+            const currentPhotoPath = photo_url ? path.join(process.cwd(), 'public', photo_url.replace(/^\//, '')) : '';
+            const currentPdfPath = record.pdf_url ? path.join(process.cwd(), 'public', record.pdf_url.replace(/^\//, '')) : '';
+            const photoDiskExists = photo_url && fs.existsSync(currentPhotoPath);
+            const pdfDiskExists = record.pdf_url && fs.existsSync(currentPdfPath);
+
+            if (!photoDiskExists || !pdfDiskExists) {
+                try {
+                    const baseAppId = (record.application_id || '').split('-')[0];
+                    const siblings = await (prisma as any).hecRecord.findMany({
+                        where: {
+                            isDeleted: false,
+                            OR: [
+                                { application_id: baseAppId },
+                                { application_id: { startsWith: baseAppId } },
+                                { cnic: record.cnic }
+                            ]
+                        },
+                        orderBy: { id: 'asc' }
+                    });
+
+                    for (const sib of siblings) {
+                        if (!photoDiskExists && sib.photo_url) {
+                            const sibPhotoPath = path.join(process.cwd(), 'public', sib.photo_url.replace(/^\//, ''));
+                            if (fs.existsSync(sibPhotoPath)) {
+                                photo_url = sib.photo_url;
+                            }
+                        }
+                        if (!pdfDiskExists && sib.pdf_url) {
+                            const sibPdfPath = path.join(process.cwd(), 'public', sib.pdf_url.replace(/^\//, ''));
+                            if (fs.existsSync(sibPdfPath)) {
+                                record.pdf_url = sib.pdf_url;
+                            }
+                        }
+                    }
+                } catch (siblingError) {
+                    console.error("Sibling degree lookup error:", siblingError);
+                }
+            }
         } else {
             // Fallback Dummy Data if no ID is provided or record not found
             cnic = "3540139675680";
@@ -336,28 +376,32 @@ export async function GET(req: NextRequest) {
                         photoBuffer[1] === 0x50 && 
                         photoBuffer[2] === 0x4E && 
                         photoBuffer[3] === 0x47;
+                    const isJpg = photoBuffer.length > 2 && 
+                        photoBuffer[0] === 0xFF && 
+                        photoBuffer[1] === 0xD8;
 
                     try {
-                        if (isPng || photo_url.toLowerCase().endsWith('.png')) {
+                        if (isPng) {
                             photoImage = await templateDoc.embedPng(photoBuffer);
-                        } else {
+                        } else if (isJpg) {
                             photoImage = await templateDoc.embedJpg(photoBuffer);
+                        } else {
+                            try {
+                                photoImage = await templateDoc.embedJpg(photoBuffer);
+                            } catch {
+                                photoImage = await templateDoc.embedPng(photoBuffer);
+                            }
                         }
                     } catch (embedError) {
-                        // Fallback attempt: use sharp to normalize ANY image format (jfif, webp, bmp, tiff, etc.) to standard PNG/JPEG
                         try {
-                            const sharp = (await import('sharp')).default;
-                            const normalizedBuffer = await sharp(photoBuffer).png().toBuffer();
-                            photoImage = await templateDoc.embedPng(normalizedBuffer);
-                        } catch (sharpError) {
+                            photoImage = isPng ? await templateDoc.embedJpg(photoBuffer) : await templateDoc.embedPng(photoBuffer);
+                        } catch {
                             try {
-                                if (isPng || photo_url.toLowerCase().endsWith('.png')) {
-                                    photoImage = await templateDoc.embedJpg(photoBuffer);
-                                } else {
-                                    photoImage = await templateDoc.embedPng(photoBuffer);
-                                }
-                            } catch (fallbackError) {
-                                console.error("Could not embed image with any decoder", fallbackError);
+                                const sharp = (await import('sharp')).default;
+                                const normalizedBuffer = await sharp(photoBuffer).png().toBuffer();
+                                photoImage = await templateDoc.embedPng(normalizedBuffer);
+                            } catch (e) {
+                                console.error("Could not embed image", e);
                             }
                         }
                     }
